@@ -16,20 +16,20 @@ export async function getAbout(): Promise<AboutData> {
   try {
     return FALLBACK;
 
-    const posts = await getPosts("about", { per_page: 1 });
-    const post = posts[0];
-    if (!post) return FALLBACK;
+    // const posts = await getPosts("about", { per_page: 1 });
+    // const post = posts[0];
+    // if (!post) return FALLBACK;
 
-    const acf = post.acf as { heading?: string; description?: string };
+    // const acf = post.acf as { heading?: string; description?: string };
 
-    return {
-      heading: acf.heading
-        ? acf.heading.split(/\r?\n/).filter(Boolean)
-        : FALLBACK.heading,
-      paragraphs: acf.description
-        ? acf.description.split(/\r?\n\r?\n/).filter(Boolean)
-        : FALLBACK.paragraphs,
-    };
+    // return {
+    //   heading: acf.heading
+    //     ? acf.heading.split(/\r?\n/).filter(Boolean)
+    //     : FALLBACK.heading,
+    //   paragraphs: acf.description
+    //     ? acf.description.split(/\r?\n\r?\n/).filter(Boolean)
+    //     : FALLBACK.paragraphs,
+    // };
   } catch {
     return FALLBACK;
   }
