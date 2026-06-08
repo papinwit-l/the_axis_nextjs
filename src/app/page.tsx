@@ -41,11 +41,13 @@ export default async function HomePage() {
   // console.log(aboutData);
   return (
     <main>
-      <BannerSection slides={bannerSlides} />
+      {/* <BannerSection slides={bannerSlides} /> */}
+      <BannerSection />
       <FormSection />
       <AboutSection data={aboutData} />
       <InformationSection data={informationData} />
-      <UnitSection units={unitTypes} />
+      {/* <UnitSection units={unitTypes} /> */}
+      <UnitSection />
       <GallerySection data={galleryData} />
       <VideoSection data={videoData} />
       <LocationSection location={locationData} contact={contactData} />
