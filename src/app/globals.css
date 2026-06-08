@@ -1,0 +1,323 @@
+/* FONTS IMPORT */
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+
+@import "tailwindcss";
+
+/* ============================================
+   CUSTOM FONTS
+   Place font files in /public/fonts/
+   ============================================ */
+
+@font-face {
+  font-family: "AcciaPiano";
+  src: url("/fonts/AcciaPiano-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AcciaPiano";
+  src: url("/fonts/AcciaPiano-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AcciaPiano";
+  src: url("/fonts/AcciaPiano-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InstrumentSans";
+  src: url("/fonts/InstrumentSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InstrumentSans";
+  src: url("/fonts/InstrumentSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "InstrumentSans";
+  src: url("/fonts/InstrumentSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MyriadPro";
+  src: url("/fonts/MyriadPro-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ============================================
+   TAILWIND v4 THEME TOKENS
+   ============================================ */
+
+@theme {
+  /* Main Theme Colors */
+  --color-primary: #ede3d3;
+  --color-secondary: #fffff8;
+  --color-accent-light: #33271e;
+  --color-accent: #000000;
+
+  /* ---- Primary Browns ---- */
+  --color-brown-950: #1a120b;
+  --color-brown-900: #2a1f14;
+  --color-brown-800: #3b2a1a;
+  --color-brown-700: #4a3525;
+  --color-brown-600: #5c4033;
+  --color-brown-500: #6e5240;
+  --color-brown-400: #8b7355;
+  --color-brown-300: #a8936f;
+  --color-brown-200: #c4a87c;
+  --color-brown-100: #d4c4a0;
+  --color-brown-50: #e8dcc8;
+
+  /* ---- Neutrals (warm-tinted) ---- */
+  --color-warm-50: #faf8f5;
+  --color-warm-100: #f5f0eb;
+  --color-warm-200: #e8e0d8;
+  --color-warm-300: #d5cbc0;
+  --color-warm-400: #bfb3a5;
+
+  /* ---- Gold Accent ---- */
+  --color-gold: #c4a87c;
+  --color-gold-light: #d4c4a0;
+  --color-gold-dark: #a8936f;
+
+  /* ---- Font Families ---- */
+  /* --font-display: "AcciaPiano", "Georgia", serif; */
+  --font-display: "Aboreto", serif;
+  --font-body: "Anuphan", sans-serif;
+  --font-alt: "MyriadPro", "InstrumentSans", sans-serif;
+
+  /* ---- Container widths ---- */
+  --container-max: 1280px;
+  --container-narrow: 960px;
+  --container-text: 720px;
+
+  /* ---- Animation ---- */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-brown-900);
+  background-color: var(--color-warm-100);
+  line-height: 1.7;
+  font-size: 16px;
+
+  overflow-x: clip;
+}
+
+/* ============================================
+   TYPOGRAPHY DEFAULTS
+   ============================================ */
+
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+p {
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 300ms var(--ease-smooth);
+} */
+
+/* ============================================
+   REUSABLE COMPONENT CLASSES
+   (use alongside Tailwind utilities)
+   ============================================ */
+
+/* -- Buttons -- */
+
+.btn-outline {
+  @apply inline-flex items-center justify-center
+    px-10 py-3.5
+    border border-accent
+    bg-transparent text-accent
+    text-sm font-semibold uppercase tracking-[0.15em]
+    transition-all duration-300
+    cursor-pointer;
+  font-family: var(--font-body);
+}
+
+.btn-outline:hover {
+  @apply bg-accent text-white;
+}
+
+.btn-outline-light {
+  @apply inline-flex items-center justify-center
+    px-10 py-3.5
+    border border-gold
+    bg-transparent text-gold
+    text-sm font-semibold uppercase tracking-[0.15em]
+    transition-all duration-300
+    cursor-pointer;
+  font-family: var(--font-body);
+}
+
+.btn-outline-light:hover {
+  @apply bg-gold text-accent;
+}
+
+/* -- Form inputs -- */
+
+.input-underline {
+  @apply w-full py-3
+    border-b border-warm-300
+    bg-transparent text-accent
+    text-sm outline-none
+    transition-colors duration-300;
+  font-family: var(--font-body);
+}
+
+.input-underline::placeholder {
+  @apply text-brown-400 font-normal;
+}
+
+.input-underline:focus {
+  @apply border-accent;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  h1,
+  h2 {
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Directional variants */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.97);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.reveal-left--visible,
+.reveal-right--visible,
+.reveal-scale--visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* Stagger delay helpers */
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+.reveal-delay-5 {
+  transition-delay: 0.5s;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
