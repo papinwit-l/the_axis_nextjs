@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import MockImage from "../ui/MockImage";
 
 interface FloorPlan {
   label: string;
@@ -249,13 +250,14 @@ function FloorCard({
     >
       {/* Floor plan image */}
       <div className="relative aspect-[4/3] mb-6">
-        <Image
+        {/* <Image
           src={floor.src}
           alt={floor.label}
           fill
           className="object-contain"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 640px"
-        />
+        /> */}
+        <MockImage text={floor.label} />
       </div>
 
       {/* Floor label */}
