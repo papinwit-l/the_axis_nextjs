@@ -32,16 +32,21 @@ import { getContact } from "@/lib/wordpress";
 // });
 
 export const metadata: Metadata = {
-  title: "Kailani Private Pool Villa | Luxury Living in Pattaya",
+  title: "The Axis Utthayan | Modern Classic Monochrome Luxury Residences",
   description:
-    "A boutique collection of private luxury pool villas nestled on Pattaya's eastern coastline, just 900 metres from Jomtien Beach.",
+    "A collection of modern classic monochrome luxury 3-storey residences nestled along Utthayan Road, one of Bangkok's most beautiful roads. 9 units, 64.4–164.1 sq.wah.",
   keywords: [
-    "Kailani",
-    "private pool villa",
-    "Pattaya",
-    "luxury villa",
-    "Jomtien",
-    "Chonburi",
+    "The Axis",
+    "Utthayan",
+    "luxury house",
+    "modern classic",
+    "monochrome",
+    "3-storey house",
+    "Bangkok",
+    "Utthayan Road",
+    "Aksa Road",
+    "บ้านหรู",
+    "อุทยาน",
   ],
 };
 

@@ -2,108 +2,102 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Logo from "../ui/Logo";
 import useScrollReveal from "@/hooks/useScrollReveal";
-import type { UnitTypeData } from "@/lib/wordpress";
+
+interface FloorPlan {
+  label: string;
+  src: string;
+  rooms: string[];
+}
 
 interface UnitType {
   name: string;
-  bedrooms: number;
-  bathrooms: number;
-  carparks: number;
-  floors: { src: string; label: string }[];
-  rooms: { no: number; name: string }[];
+  usableArea: string;
+  landArea: string;
+  floors: FloorPlan[];
 }
 
 const UNITS: UnitType[] = [
   {
-    name: "Type A",
-    bedrooms: 4,
-    bathrooms: 5,
-    carparks: 3,
+    name: "Prime",
+    usableArea: "448 SQ.M",
+    landArea: "95.2 - 96.9 SQ.WAH",
     floors: [
-      { src: "/images/unit/type-a-1f.png", label: "1st Floor Plan" },
-      { src: "/images/unit/type-a-2f.png", label: "2nd Floor Plan" },
-    ],
-    rooms: [
-      { no: 1, name: "Carpark" },
-      { no: 2, name: "Foyer" },
-      { no: 3, name: "Living Room" },
-      { no: 4, name: "Dining Room" },
-      { no: 5, name: "Kitchen" },
-      { no: 6, name: "Powder Room" },
-      { no: 7, name: "Storage" },
-      { no: 8, name: "Bedroom 1" },
-      { no: 9, name: "Bathroom 1" },
-      { no: 10, name: "Terrace" },
-      { no: 11, name: "Pool" },
-      { no: 12, name: "Backyard" },
-      { no: 13, name: "Laundry" },
-      { no: 14, name: "Stairs" },
-      { no: 15, name: "Bedroom 2" },
-      { no: 16, name: "Bathroom 2" },
-      { no: 17, name: "Bedroom 3" },
-      { no: 18, name: "Bathroom 3" },
-      { no: 19, name: "Master Bedroom" },
-      { no: 20, name: "Walk In Closet" },
-      { no: 21, name: "Bathroom 4" },
-      { no: 22, name: "Storage" },
-      { no: 23, name: "Terrace" },
-      { no: 24, name: "Terrace (Bedroom 3)" },
+      {
+        label: "1st Floor",
+        src: "/images/unit/prime-1f.png",
+        rooms: [
+          "Double Volume Living Area",
+          "Bedroom 1",
+          "Elevator-Ready",
+          "Dining Area",
+          "Pantry Area",
+          "Kitchen Room",
+          "Powder Room",
+          "3-5 Parking Space",
+          "Maid Room",
+        ],
+      },
+      {
+        label: "2nd Floor",
+        src: "/images/unit/prime-2f.png",
+        rooms: ["Master Bedroom 1", "Bedroom 2", "Balcony", "Service Room"],
+      },
+      {
+        label: "3rd Floor",
+        src: "/images/unit/prime-3f.png",
+        rooms: [
+          "Master Bedroom 2",
+          "Walk-in Closet",
+          "Multi-purpose Room (Tea Room)",
+          "Terrace",
+        ],
+      },
     ],
   },
   {
-    name: "Type B",
-    bedrooms: 5,
-    bathrooms: 6,
-    carparks: 4,
+    name: "Prive",
+    usableArea: "336 SQ.M",
+    landArea: "64.5 - 75.2 SQ.WAH",
     floors: [
-      { src: "/images/unit/type-b-1f.png", label: "1st Floor Plan" },
-      { src: "/images/unit/type-b-2f.png", label: "2nd Floor Plan" },
-    ],
-    rooms: [
-      { no: 1, name: "Carpark" },
-      { no: 2, name: "Foyer" },
-      { no: 3, name: "Living Room" },
-      { no: 4, name: "Dining Room" },
-      { no: 5, name: "Kitchen" },
-      { no: 6, name: "Powder Room" },
-      { no: 7, name: "Storage" },
-      { no: 8, name: "Bedroom 1" },
-      { no: 9, name: "Bathroom 1" },
-      { no: 10, name: "Terrace" },
-      { no: 11, name: "Pool" },
-      { no: 12, name: "Backyard" },
-      { no: 13, name: "Laundry" },
-      { no: 14, name: "Stairs" },
-      { no: 15, name: "Bedroom 2" },
-      { no: 16, name: "Bathroom 2" },
-      { no: 17, name: "Master bedroom" },
-      { no: 18, name: "Walk In Closet" },
-      { no: 19, name: "Master bathroom" },
-      { no: 20, name: "Bedroom 4" },
-      { no: 21, name: "Bathroom 4" },
-      { no: 22, name: "Bedtoom 5" },
-      { no: 23, name: "Bathroom 5" },
-      { no: 24, name: "Terrace" },
-      { no: 25, name: "Terrace (Bedroom 5)" },
+      {
+        label: "1st Floor",
+        src: "/images/unit/prive-1f.png",
+        rooms: [
+          "Double Volume Living & Dining Area",
+          "Bedroom 1",
+          "Elevator-Ready",
+          "Pantry Area",
+          "Kitchen Room",
+          "Bathroom",
+          "3 Parking Space",
+          "Maid Room",
+        ],
+      },
+      {
+        label: "2nd Floor",
+        src: "/images/unit/prive-2f.png",
+        rooms: ["Bedroom 2", "Outdoor Terrace"],
+      },
+      {
+        label: "3rd Floor",
+        src: "/images/unit/prive-3f.png",
+        rooms: ["Bedroom 3", "Master Bedroom", "Flex Space"],
+      },
     ],
   },
 ];
 
-// export default function UnitSection({ units }: { units: UnitTypeData[] }) {
 export default function UnitSection() {
   const units = UNITS;
   const [currentUnit, setCurrentUnit] = useState(0);
   const { ref: headingRef, isVisible: headingVisible } = useScrollReveal();
-  const { ref: plansRef, isVisible: plansVisible } = useScrollReveal();
-  const { ref: detailsRef, isVisible: detailsVisible } = useScrollReveal();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal();
 
   const unit = units[currentUnit];
 
   const hv = headingVisible ? "reveal--visible" : "";
-  const pv = plansVisible ? "reveal-scale--visible" : "";
-  const dv = detailsVisible ? "reveal--visible" : "";
+  const cv = contentVisible ? "reveal--visible" : "";
 
   const handleUnitChange = (index: number) => {
     if (index < 0 || index >= units.length) return;
@@ -116,8 +110,7 @@ export default function UnitSection() {
     <section id="unit" className="bg-secondary py-14 lg:py-28">
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Heading */}
-        <div ref={headingRef} className="text-center mb-8 lg:mb-16">
-          {/* <Logo className={`mx-auto mb-2 h-3 text-brown-800 reveal ${hv}`} /> */}
+        <div ref={headingRef} className="text-center mb-10 lg:mb-16">
           <h2
             className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase mb-8 reveal reveal-delay-1 ${hv}`}
           >
@@ -125,82 +118,82 @@ export default function UnitSection() {
           </h2>
         </div>
 
-        {/* Floor plans with arrows */}
-        <div ref={plansRef} className="relative">
-          {/* Left arrow */}
-          {units.length > 1 && (
+        {/* Unit selector + specs bar */}
+        <div
+          ref={contentRef}
+          className={`flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10 lg:mb-14 reveal ${cv}`}
+        >
+          {/* Unit name + nav */}
+          <div className="flex items-center gap-4">
             <button
               aria-label="Previous unit"
-              className="absolute left-0 lg:-left-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
+              className="w-8 h-8 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
               onClick={() => handleUnitChange(currentUnit - 1)}
               disabled={currentUnit === 0}
             >
               <svg
-                width="16"
-                height="28"
-                viewBox="0 0 16 28"
+                width="12"
+                height="20"
+                viewBox="0 0 12 20"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M14 2L2 14L14 26" />
+                <path d="M10 2L2 10L10 18" />
               </svg>
             </button>
-          )}
 
-          {/* Floor plan images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 px-2 lg:px-12">
-            {unit.floors.map((floor, index) => (
-              <div
-                key={floor.label}
-                className={`reveal-scale ${pv}`}
-                style={{ transitionDelay: `${index * 0.15}s` }}
-              >
-                <div className="relative aspect-[4/3]">
-                  <Image
-                    src={floor.src}
-                    alt={floor.label}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <p className="font-body text-sm text-brown-500 text-center mt-4">
-                  {floor.label}
-                </p>
-              </div>
-            ))}
-          </div>
+            <h3 className="font-display text-2xl lg:text-4xl tracking-[0.15em] text-accent uppercase">
+              {unit.name}
+            </h3>
 
-          {/* Right arrow */}
-          {units.length > 1 && (
             <button
               aria-label="Next unit"
-              className="absolute right-0 lg:-right-6 top-1/2 -translate-y-1/2 z-10 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
+              className="w-8 h-8 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
               onClick={() => handleUnitChange(currentUnit + 1)}
               disabled={currentUnit === units.length - 1}
             >
               <svg
-                width="16"
-                height="28"
-                viewBox="0 0 16 28"
+                width="12"
+                height="20"
+                viewBox="0 0 12 20"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M2 2L14 14L2 26" />
+                <path d="M2 2L10 10L2 18" />
               </svg>
             </button>
-          )}
+          </div>
+
+          {/* Specs */}
+          <div className="flex gap-6 lg:gap-10 font-body text-sm text-brown-500 tracking-[0.05em]">
+            <div>
+              <span className="text-brown-400 text-xs uppercase tracking-[0.1em]">
+                Usable Area
+              </span>
+              <p className="text-brown-800 font-semibold mt-0.5">
+                {unit.usableArea}
+              </p>
+            </div>
+            <div>
+              <span className="text-brown-400 text-xs uppercase tracking-[0.1em]">
+                Land Area
+              </span>
+              <p className="text-brown-800 font-semibold mt-0.5">
+                {unit.landArea}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Dot Indicators */}
         {units.length > 1 && (
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mb-10 lg:mb-14">
             {units.map((_, i) => (
               <button
                 key={i}
@@ -208,60 +201,76 @@ export default function UnitSection() {
                 className={`w-2 h-2 rounded-full transition-colors duration-300 cursor-pointer ${
                   i === currentUnit ? "bg-brown-800" : "bg-brown-300"
                 }`}
-                aria-label={`Go to unit ${i + 1}`}
+                aria-label={`Go to ${units[i].name}`}
               />
             ))}
           </div>
         )}
 
-        {/* Gold divider */}
-        <hr className="border-gold/50 mt-6 lg:mt-10 mb-6 lg:mb-8" />
+        {/* Floor plans — 1F large, 2F + 3F side by side */}
+        <div className="space-y-10 lg:space-y-14">
+          {/* 1st Floor — full width */}
+          {unit.floors[0] && (
+            <FloorCard floor={unit.floors[0]} visible={cv} index={0} />
+          )}
 
-        {/* Unit specs + Room legend */}
-        <div
-          ref={detailsRef}
-          className="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-16"
-        >
-          {/* Left: Type specs */}
-          <div className={`shrink-0 reveal ${dv}`}>
-            <h3 className="font-display text-xl lg:text-3xl tracking-[0.1em] text-brown-800 mb-3">
-              {unit.name}
-            </h3>
-            <ul className="font-body text-sm text-brown-600 flex gap-4 lg:flex-col lg:gap-1 lg:space-y-0">
-              <li>{unit.bedrooms} Bedrooms</li>
-              <li className="lg:hidden text-brown-300">·</li>
-              <li>{unit.bathrooms} Bathrooms</li>
-              <li className="lg:hidden text-brown-300">·</li>
-              <li>{unit.carparks} Carparks</li>
-            </ul>
-          </div>
-
-          {/* Right: Room legend */}
-          <div className="columns-2 sm:columns-3 lg:columns-4 gap-x-10">
-            {/* <div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-1.5"
-            style={{
-              gridAutoFlow: "column",
-              gridTemplateRows: `repeat(${Math.ceil(unit.rooms.length / 4)}, auto)`,
-            }}
-          > */}
-            {unit.rooms.map((room) => (
-              <div
-                key={room.no}
-                className={`flex items-baseline gap-2 mb-1.5 break-inside-avoid reveal ${dv}`}
-                style={{ transitionDelay: `${0.1 + room.no * 0.03}s` }}
-              >
-                <span className="font-body text-xs text-brown-400 w-5 text-right shrink-0">
-                  {room.no}.
-                </span>
-                <span className="font-body text-xs text-brown-600">
-                  {room.name}
-                </span>
-              </div>
-            ))}
-          </div>
+          {/* 2nd + 3rd Floor — side by side on desktop */}
+          {unit.floors.length > 1 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
+              {unit.floors.slice(1).map((floor, i) => (
+                <FloorCard
+                  key={floor.label}
+                  floor={floor}
+                  visible={cv}
+                  index={i + 1}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
+  );
+}
+
+function FloorCard({
+  floor,
+  visible,
+  index,
+}: {
+  floor: FloorPlan;
+  visible: string;
+  index: number;
+}) {
+  return (
+    <div
+      className={`reveal ${visible}`}
+      style={{ transitionDelay: `${0.15 + index * 0.12}s` }}
+    >
+      {/* Floor plan image */}
+      <div className="relative aspect-[4/3] mb-6">
+        <Image
+          src={floor.src}
+          alt={floor.label}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 640px"
+        />
+      </div>
+
+      {/* Floor label */}
+      <h4 className="font-display text-xl lg:text-2xl tracking-[0.15em] text-accent mb-3">
+        {floor.label}
+      </h4>
+
+      {/* Room list */}
+      <ul className="columns-2 gap-x-8 font-body text-sm text-brown-500 leading-relaxed">
+        {floor.rooms.map((room) => (
+          <li key={room} className="break-inside-avoid mb-1">
+            {room}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
