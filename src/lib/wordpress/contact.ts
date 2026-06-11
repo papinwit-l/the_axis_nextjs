@@ -13,17 +13,19 @@ export type ContactData = {
 };
 
 const FALLBACK: ContactData = {
-  phone: "+66847223363",
-  email: "info@kailani.com",
+  phone: "+66123456789",
+  email: "info@theaxis.com",
   address: [
-    "Kailani Private Property, Pattaya City,",
-    "Bang Lamung District, Chon Buri 20150",
+    // "Kailani Private Property, Pattaya City,",
+    // "Bang Lamung District, Chon Buri 20150",
+    "88 Khwaeng Sala Thammasop, Khet Thawi Watthana, Krung Thep Maha Nakhon 10170",
   ],
   socials: [],
 };
 
 export async function getContact(): Promise<ContactData> {
   try {
+    return FALLBACK;
     const posts = await getPosts("contact", { per_page: 1 }, { embed: false });
     const post = posts[0];
     if (!post) return FALLBACK;

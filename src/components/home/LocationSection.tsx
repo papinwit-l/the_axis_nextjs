@@ -120,7 +120,7 @@ export default function LocationSection({
           {/* Right: Distance groups */}
           <div ref={infoRef} className="flex flex-col gap-8 lg:gap-10 lg:py-2">
             {/* Address */}
-            {/* {contact.address.length > 0 && (
+            {contact.address.length > 0 && (
               <div className={`reveal ${iv}`}>
                 <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
                   Address
@@ -134,7 +134,7 @@ export default function LocationSection({
                   ))}
                 </p>
               </div>
-            )} */}
+            )}
 
             {/* Distance groups */}
             {location.distanceGroups.map((group, gi) => (
