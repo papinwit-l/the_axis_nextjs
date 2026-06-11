@@ -2,25 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Logo from "../ui/Logo";
 import useScrollReveal from "@/hooks/useScrollReveal";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LineIcon,
-  WhatsAppIcon,
-} from "../ui/SocialMediaIcon";
-import type { LocationData, ContactData, SocialLink } from "@/lib/wordpress";
-
-const SOCIAL_ICON_MAP: Record<
-  SocialLink["platform"],
-  React.FC<{ className?: string }>
-> = {
-  instagram: InstagramIcon,
-  facebook: FacebookIcon,
-  line: LineIcon,
-  whatsapp: WhatsAppIcon,
-};
+import type { LocationData, ContactData } from "@/lib/wordpress";
 
 type MapView = "graphic" | "google";
 
@@ -33,29 +16,35 @@ export default function LocationSection({
 }) {
   const [mapView, setMapView] = useState<MapView>("graphic");
   const { ref: headingRef, isVisible: headingVisible } = useScrollReveal();
-  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal();
+  const { ref: mapRef, isVisible: mapVisible } = useScrollReveal();
+  const { ref: infoRef, isVisible: infoVisible } = useScrollReveal();
 
   const hv = headingVisible ? "reveal--visible" : "";
-  const cl = contentVisible ? "reveal-left--visible" : "";
-  const cr = contentVisible ? "reveal-right--visible" : "";
-  const cv = contentVisible ? "reveal--visible" : "";
+  const mv = mapVisible ? "reveal-scale--visible" : "";
+  const iv = infoVisible ? "reveal--visible" : "";
 
   return (
     <section id="location" className="bg-secondary py-20 lg:py-28">
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Heading */}
-        <div ref={headingRef} className="text-center mb-12 lg:mb-16">
-          <Logo className={`mx-auto mb-2 h-3 text-accent reveal ${hv}`} />
+        <div ref={headingRef} className="text-center mb-6 lg:mb-8">
           <h2
-            className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase reveal reveal-delay-1 ${hv}`}
+            className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase mb-6 reveal reveal-delay-1 ${hv}`}
           >
             Location
           </h2>
+          {location.description && (
+            <p
+              className={`font-body text-sm lg:text-base text-accent/70 tracking-[0.02em] leading-relaxed max-w-[var(--container-text)] mx-auto reveal reveal-delay-2 ${hv}`}
+            >
+              {location.description}
+            </p>
+          )}
         </div>
 
         {/* Map toggle */}
         {location.googleMapsUrl && (
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-8 lg:mb-10">
             <button
               onClick={() => setMapView("graphic")}
               className={`font-body text-xs tracking-[0.15em] uppercase px-6 lg:px-8 py-2 rounded-full transition-all duration-300 cursor-pointer ${
@@ -79,14 +68,10 @@ export default function LocationSection({
           </div>
         )}
 
-        {/* Map + Info */}
-        <div
-          ref={contentRef}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start"
-        >
+        {/* Map + Distance groups side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 items-start">
           {/* Left: Map */}
-          <div className={`reveal-left ${cl}`}>
-            {/* Map content */}
+          <div ref={mapRef} className={`reveal-scale ${mv}`}>
             <div className="relative aspect-[5/4] overflow-hidden">
               {/* Graphic map */}
               <div
@@ -98,10 +83,10 @@ export default function LocationSection({
               >
                 <Image
                   src={location.mapImage}
-                  alt="Kailani location map"
+                  alt="The Axis Utthayan location map"
                   fill
                   className="object-contain"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
                 />
               </div>
 
@@ -123,7 +108,7 @@ export default function LocationSection({
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Kailani location on Google Maps"
+                      title="The Axis Utthayan on Google Maps"
                       className="absolute inset-0 w-full h-full"
                     />
                   )}
@@ -132,17 +117,15 @@ export default function LocationSection({
             </div>
           </div>
 
-          {/* Right: Address, Distances, Contact */}
-          <div
-            className={`flex flex-col mt-2 gap-8 lg:gap-10 lg:py-4 reveal-right ${cr}`}
-          >
+          {/* Right: Distance groups */}
+          <div ref={infoRef} className="flex flex-col gap-8 lg:gap-10 lg:py-2">
             {/* Address */}
             {contact.address.length > 0 && (
-              <div className={`reveal reveal-delay-1 ${cv}`}>
+              <div className={`reveal ${iv}`}>
                 <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
                   Address
                 </h3>
-                <p className="font-body text-sm text-accent/70 tracking-[0.1em] leading-relaxed">
+                <p className="font-body text-sm text-accent/70 tracking-[0.02em] leading-relaxed">
                   {contact.address.map((line, i) => (
                     <span key={i}>
                       {i > 0 && <br />}
@@ -153,88 +136,33 @@ export default function LocationSection({
               </div>
             )}
 
-            {/* Distances */}
-            {location.distances.length > 0 && (
-              <div className={`reveal reveal-delay-2 ${cv}`}>
+            {/* Distance groups */}
+            {location.distanceGroups.map((group, gi) => (
+              <div
+                key={group.category}
+                className={`reveal ${iv}`}
+                style={{ transitionDelay: `${0.1 + gi * 0.1}s` }}
+              >
                 <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
-                  Distances
+                  {group.category}
                 </h3>
                 <div className="space-y-1.5">
-                  {location.distances.map((d, i) => (
-                    <div key={i} className="flex items-baseline gap-3">
-                      <span className="font-body text-sm tracking-[0.1em] text-accent w-16 shrink-0">
-                        {d.value}
+                  {group.items.map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex items-baseline justify-between gap-4"
+                    >
+                      <span className="font-body text-sm tracking-[0.02em] text-accent/70">
+                        {item.label}
                       </span>
-                      <span className="font-body text-sm tracking-[0.1em] text-accent/70">
-                        {d.label}
+                      <span className="font-body text-sm tracking-[0.05em] text-accent shrink-0">
+                        {item.value}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
-
-            {/* Contact */}
-            {/* {(contact.phone || contact.email) && (
-              <div className={`reveal reveal-delay-3 ${cv}`}>
-                <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
-                  Contact
-                </h3>
-                <div className="space-y-1.5">
-                  {contact.phone && (
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-body text-sm text-brown-400 w-4 shrink-0">
-                        T:
-                      </span>
-                      <a
-                        href={`tel:${contact.phone}`}
-                        className="font-body text-sm text-brown-600 hover:text-accent transition-colors duration-300"
-                      >
-                        {contact.phone}
-                      </a>
-                    </div>
-                  )}
-                  {contact.email && (
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-body text-sm text-brown-400 w-4 shrink-0">
-                        E:
-                      </span>
-                      <a
-                        href={`mailto:${contact.email}`}
-                        className="font-body text-sm text-brown-600 hover:text-accent transition-colors duration-300"
-                      >
-                        {contact.email}
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )} */}
-
-            {/* Social icons — only renders icons with URLs */}
-
-            {/* {contact.socials.length > 0 && (
-              <div
-                className={`flex items-center gap-4 pt-2 reveal reveal-delay-4 ${cv}`}
-              >
-                {contact.socials.map((social) => {
-                  const Icon = SOCIAL_ICON_MAP[social.platform];
-                  if (!Icon) return null;
-                  return (
-                    <a
-                      key={social.platform}
-                      href={social.url}
-                      aria-label={social.platform}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:text-gold transition-colors duration-300"
-                    >
-                      <Icon className="w-6 h-6" />
-                    </a>
-                  );
-                })}
-              </div>
-            )} */}
+            ))}
           </div>
         </div>
       </div>

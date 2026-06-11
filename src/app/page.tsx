@@ -4,6 +4,7 @@ import FormSection from "@/components/home/FormSection";
 import GallerySection from "@/components/home/GallerySection";
 import InformationSection from "@/components/home/InformationSection";
 import LocationSection from "@/components/home/LocationSection";
+import MasterPlanSection from "@/components/home/MasterPlanSection";
 import UnitSection from "@/components/home/UnitSection";
 import VideoSection from "@/components/home/VideoSection";
 import {
@@ -48,6 +49,7 @@ export default async function HomePage() {
       <InformationSection data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
       <UnitSection />
+      <MasterPlanSection />
       <GallerySection data={galleryData} />
       <VideoSection data={videoData} />
       <LocationSection location={locationData} contact={contactData} />

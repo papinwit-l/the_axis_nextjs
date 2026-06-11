@@ -6,7 +6,7 @@ export type AboutData = {
 };
 
 const FALLBACK: AboutData = {
-  heading: ["Where the sea meets the sky,", "and life meets design."],
+  heading: ["WHERE EVERY MOMENT", "BECOMES A FAMILY LEGACY"],
   paragraphs: [
     `The AXIS is a boutique collection of private luxury pool villas nestled on Pattaya's eastern coastline, just 900 meters from Jomtien Beach.Taking its name from the Hawaiian word for "heavenly sea" a union of kai (ocean) and land (sky) — the project is conceived as more than a residence.It is a sanctuary where nature, architecture, and the rhythm of tropical living converge`,
   ],

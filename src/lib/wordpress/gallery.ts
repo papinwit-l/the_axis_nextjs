@@ -37,7 +37,20 @@ const FALLBACK: GalleryData = {
       alt: "exterior-06",
     },
   ],
-  interior: [],
+  interior: [
+    {
+      src: "/images/gallery/gallery-interior-01.png",
+      alt: "interior-01",
+    },
+    {
+      src: "/images/gallery/gallery-interior-02.png",
+      alt: "interior-02",
+    },
+    {
+      src: "/images/gallery/gallery-interior-03.png",
+      alt: "interior-03",
+    },
+  ],
 };
 
 export async function getGallery(): Promise<GalleryData> {

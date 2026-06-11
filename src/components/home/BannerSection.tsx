@@ -13,14 +13,14 @@ const SLIDES = [
     src: "/images/banner/banner-image-01.png",
     alt: "banner-01",
   },
-  // {
-  //   src: "/images/banner/banner-image-02.png",
-  //   alt: "banner-02",
-  // },
-  // {
-  //   src: "/images/banner/banner-image-03.png",
-  //   alt: "banner-03",
-  // },
+  {
+    src: "/images/banner/banner-image-02.png",
+    alt: "banner-02",
+  },
+  {
+    src: "/images/banner/banner-image-03.png",
+    alt: "banner-03",
+  },
 ];
 
 const AUTO_PLAY_INTERVAL = 6000;

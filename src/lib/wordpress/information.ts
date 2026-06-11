@@ -13,15 +13,15 @@ export type InformationData = {
 const FALLBACK: InformationData = {
   image: { src: "/images/information.png", alt: "Kailani villa aerial view" },
   details: [
-    { label: "Project:", value: "Kailani private pool villa" },
-    { label: "Developer:", value: "Kailani Property Co.,Ltd" },
     {
-      label: "Location:",
-      value: "Soi Chaiyapruk 2, Pattaya City Banglamung Chonburi 20150",
+      label: "Location",
+      value: "Utthayan - Aksa Road",
     },
-    { label: "Land Area:", value: "1,824 sq.m. (1 rai 56 sq.wa)" },
-    { label: "Total Unit:", value: "4 units" },
-    { label: "Plot Area:", value: "360 – 580 sq.m. (90 – 145 sq.wa)" },
+    { label: "Land Area", value: "2 – 1 – 69 Rai" },
+    { label: "Residental Unit", value: "9 Unit." },
+    { label: "Home Area", value: "64.4 – 164.1 Sq.wah." },
+    { label: "Property Type", value: "3 - Storey House" },
+    { label: "Archetecture", value: "Modern Classic Monochorme" },
   ],
 };
 
