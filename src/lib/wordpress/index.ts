@@ -32,4 +32,4 @@ export { getContact } from "./contact";
 export type { ContactData, SocialLink } from "./contact";
 
 export { getLocation } from "./location";
-export type { LocationData, Distance } from "./location";
+export type { LocationData, DistanceGroup } from "./location";
