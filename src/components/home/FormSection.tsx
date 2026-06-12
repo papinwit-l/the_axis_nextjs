@@ -27,24 +27,22 @@ export default function FormSection() {
   };
 
   return (
-    <section id="contact" className="bg-accent py-14 lg:py-28">
+    <section id="contact" className="bg-accent-light py-14 lg:py-28">
       <div
         ref={ref}
         className="max-w-[var(--container-narrow)] mx-auto px-6 lg:px-10"
       >
         {/* Heading */}
         <div className="text-center mb-8 lg:mb-16">
-          <FullLogo
-            className={`mx-auto mb-16 text-secondary h-16 reveal ${v}`}
-          />
+          <FullLogo className={`mx-auto mb-16 text-accent h-16 reveal ${v}`} />
 
           <h2
-            className={`font-display text-secondary text-3xl lg:text-4xl tracking-[0.2em] uppercase mb-4 reveal reveal-delay-1 ${v}`}
+            className={`font-display text-accent text-3xl lg:text-4xl tracking-[0.2em] uppercase mb-4 reveal reveal-delay-1 ${v}`}
           >
             Register
           </h2>
           <p
-            className={`font-body text-xs lg:text-sm tracking-[0.15em] uppercase text-secondary reveal reveal-delay-2 ${v}`}
+            className={`font-body text-xs lg:text-sm tracking-[0.15em] uppercase text-accent reveal reveal-delay-2 ${v}`}
           >
             Register for more information with exclusive privileges.
           </p>
@@ -62,7 +60,7 @@ export default function FormSection() {
                 name="firstName"
                 placeholder="First Name*"
                 required
-                className="w-full py-3 bg-transparent border-b border-warm-400/40 text-secondary text-sm font-body placeholder:text-secondary outline-none focus:border-warm-200 transition-colors duration-300"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
             <div>
@@ -71,7 +69,7 @@ export default function FormSection() {
                 name="lastName"
                 placeholder="Last Name*"
                 required
-                className="w-full py-3 bg-transparent border-b border-warm-400/40 text-secondary text-sm font-body placeholder:text-secondary outline-none focus:border-warm-200 transition-colors duration-300"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
           </div>
@@ -86,7 +84,7 @@ export default function FormSection() {
                 name="email"
                 placeholder="Email*"
                 required
-                className="w-full py-3 bg-transparent border-b border-warm-400/40 text-secondary text-sm font-body placeholder:text-secondary outline-none focus:border-warm-200 transition-colors duration-300"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
             <div>
@@ -95,7 +93,7 @@ export default function FormSection() {
                 name="mobile"
                 placeholder="Mobile Number*"
                 required
-                className="w-full py-3 bg-transparent border-b border-warm-400/40 text-secondary text-sm font-body placeholder:text-secondary outline-none focus:border-warm-200 transition-colors duration-300"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
           </div>
@@ -106,7 +104,7 @@ export default function FormSection() {
               <select
                 name="hearAbout"
                 defaultValue=""
-                className="w-full py-3 bg-transparent border-b border-warm-400/40 text-sm font-body text-secondary outline-none appearance-none cursor-pointer focus:border-warm-200 transition-colors duration-300"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-sm font-body text-accent outline-none appearance-none cursor-pointer focus:border-brown-800 transition-colors duration-300"
               >
                 <option value="" disabled>
                   How did you hear about us?
@@ -115,7 +113,7 @@ export default function FormSection() {
                   <option
                     key={option}
                     value={option}
-                    className="bg-accent text-secondary"
+                    className="bg-accent-light text-accent"
                   >
                     {option}
                   </option>
@@ -127,7 +125,7 @@ export default function FormSection() {
                 height="8"
                 viewBox="0 0 12 8"
                 fill="none"
-                className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-secondary"
+                className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-accent"
               >
                 <path
                   d="M1 1.5L6 6.5L11 1.5"
@@ -146,7 +144,7 @@ export default function FormSection() {
           >
             <button
               type="submit"
-              className="font-display text-lg lg:text-xl tracking-[0.15em] text-secondary border border-secondary rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-secondary hover:text-accent transition-all duration-300 cursor-pointer"
+              className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer"
             >
               Register
             </button>
@@ -161,18 +159,18 @@ export default function FormSection() {
               id="privacy"
               checked={accepted}
               onChange={(e) => setAccepted(e.target.checked)}
-              className="mt-1 w-4 h-4 shrink-0 appearance-none border border-warm-400/50 bg-transparent checked:bg-warm-200 checked:border-warm-200 cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-accent checked:after:text-[10px] checked:after:font-bold"
+              className="mt-1 w-4 h-4 shrink-0 appearance-none border border-accent/50 bg-transparent checked:bg-warm-200 checked:border-accent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-accent checked:after:text-[10px] checked:after:font-bold"
             />
             <label
               htmlFor="privacy"
-              className="font-body text-[10px] lg:text-xs tracking-[0.05em] uppercase text-secondary leading-relaxed cursor-pointer"
+              className="font-body text-[10px] lg:text-xs tracking-[0.05em] uppercase text-accent leading-relaxed cursor-pointer"
             >
               Accept I have read and accept the{" "}
               <Link
                 href="#"
-                className="underline underline-offset-2 hover:text-warm-200 transition-colors duration-300"
+                className="underline underline-offset-2 hover:text-brown-800 transition-colors duration-300"
               >
-                Privacy Policy
+                Privacy Policys
               </Link>{" "}
               which contains the details of the protection of my personal data.
             </label>
