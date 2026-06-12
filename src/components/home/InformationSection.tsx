@@ -3,6 +3,7 @@
 import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import type { InformationData } from "@/lib/wordpress";
+import { Fragment } from "react/jsx-runtime";
 
 export default function InformationSection({
   data,
@@ -50,20 +51,22 @@ export default function InformationSection({
               Information
             </h2>
 
-            <dl className="space-y-3 lg:space-y-4">
+            <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 lg:gap-y-4">
               {data.details.map((item, index) => (
-                <div
-                  key={item.label}
-                  className={`flex gap-4 reveal ${v}`}
-                  style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
-                >
-                  <dt className="font-body text-sm lg:text-[15px] text-secondary w-fit shrink-0 tracking-[0.02em]">
+                <Fragment key={item.label}>
+                  <dt
+                    className={`font-body text-sm lg:text-[15px] text-secondary tracking-[0.02em] reveal ${v}`}
+                    style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
+                  >
                     {item.label}:
                   </dt>
-                  <dd className="font-body text-sm lg:text-[15px] text-secondary/90 tracking-[0.02em]">
+                  <dd
+                    className={`font-body text-sm lg:text-[15px] text-secondary/90 tracking-[0.02em] reveal ${v}`}
+                    style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
+                  >
                     {item.value}
                   </dd>
-                </div>
+                </Fragment>
               ))}
             </dl>
           </div>
