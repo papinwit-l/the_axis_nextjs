@@ -19,7 +19,7 @@ export default function InformationSection({
   return (
     <section
       id="information"
-      className="bg-accent py-14 lg:py-0 overflow-hidden"
+      className="bg-accent-light py-14 lg:py-0 overflow-hidden"
     >
       <div
         ref={ref}
@@ -46,7 +46,7 @@ export default function InformationSection({
             className={`flex flex-col justify-center lg:pl-16 lg:pr-8 lg:py-20 reveal-right ${vr}`}
           >
             <h2
-              className={`font-display text-2xl lg:text-[2.75rem] tracking-[0.2em] text-secondary uppercase mb-10 lg:mb-14 reveal reveal-delay-2 ${v}`}
+              className={`font-display text-2xl lg:text-[2.75rem] tracking-[0.2em] text-accent uppercase mb-10 lg:mb-14 reveal reveal-delay-2 ${v}`}
             >
               Information
             </h2>
@@ -55,13 +55,13 @@ export default function InformationSection({
               {data.details.map((item, index) => (
                 <Fragment key={item.label}>
                   <dt
-                    className={`font-body text-sm lg:text-[15px] text-secondary tracking-[0.02em] reveal ${v}`}
+                    className={`font-body text-sm lg:text-[15px] text-accent tracking-[0.02em] reveal ${v}`}
                     style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
                   >
                     {item.label}:
                   </dt>
                   <dd
-                    className={`font-body text-sm lg:text-[15px] text-secondary/90 tracking-[0.02em] reveal ${v}`}
+                    className={`font-body text-sm lg:text-[15px] text-accent/90 tracking-[0.02em] reveal ${v}`}
                     style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
                   >
                     {item.value}
