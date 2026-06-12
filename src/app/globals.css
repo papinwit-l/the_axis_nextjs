@@ -105,6 +105,7 @@
   --container-max: 1280px;
   --container-narrow: 960px;
   --container-text: 720px;
+  --container-px: 2.5rem;
 
   /* ---- Animation ---- */
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -176,6 +177,13 @@ a {
   text-decoration: none;
   transition: color 300ms var(--ease-smooth);
 } */
+
+:root {
+  --bleed-left: max(
+    0px,
+    calc((100vw - var(--container-max)) / 2 + var(--container-px))
+  );
+}
 
 /* ============================================
    REUSABLE COMPONENT CLASSES

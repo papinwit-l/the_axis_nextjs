@@ -27,7 +27,10 @@ export default function InformationSection({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0 lg:min-h-screen items-stretch">
           {/* Left: Image — bleeds to viewport edge */}
           <div
-            className={`relative aspect-[3/4] lg:aspect-auto lg:h-full lg:-ml-[calc((100vw-var(--container-max))/2)] lg:w-[calc(100%+(100vw-var(--container-max))/2)] reveal-left ${vl}`}
+            className={`relative aspect-[3/4] lg:aspect-auto lg:h-full
+    lg:-ml-[var(--bleed-left)]
+    lg:w-[calc(100%+var(--bleed-left))]
+    reveal-left ${vl}`}
           >
             <Image
               src={data.image.src}
