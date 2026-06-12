@@ -257,14 +257,16 @@ export default function UnitSection() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 640px"
                 />
               </div>
-              <h4 className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent mb-3">
-                {floor.label}
-              </h4>
-              <ul className="font-body text-sm text-brown-500 leading-loose">
-                {floor.rooms.map((room) => (
-                  <li key={room}>{room}</li>
-                ))}
-              </ul>
+              <div className="w-fit mx-auto text-center">
+                <h4 className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent mb-3">
+                  {floor.label}
+                </h4>
+                <ul className="font-body text-sm text-brown-500 leading-loose">
+                  {floor.rooms.map((room) => (
+                    <li key={room}>{room}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
