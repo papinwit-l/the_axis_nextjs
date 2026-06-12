@@ -11,7 +11,10 @@ export default function AboutSection({ data }: { data: AboutData }) {
   const v = isVisible ? "reveal--visible" : "";
 
   return (
-    <section id="about" className="bg-white py-14 lg:py-32">
+    <section
+      id="about"
+      className="bg-white py-14 lg:py-32 bg-[url('/images/bg-image-white.jpg')] bg-repeat"
+    >
       <div
         ref={ref}
         className="max-w-full lg:max-w-[70vw] mx-auto px-6 lg:px-10 text-center"
