@@ -54,7 +54,7 @@ export default function InformationSection({
                   className={`flex gap-4 reveal ${v}`}
                   style={{ transitionDelay: `${0.25 + index * 0.07}s` }}
                 >
-                  <dt className="font-body text-sm lg:text-[15px] text-secondary w-24 shrink-0 tracking-[0.02em]">
+                  <dt className="font-body text-sm lg:text-[15px] text-secondary w-fit shrink-0 tracking-[0.02em]">
                     {item.label}:
                   </dt>
                   <dd className="font-body text-sm lg:text-[15px] text-secondary/90 tracking-[0.02em]">
