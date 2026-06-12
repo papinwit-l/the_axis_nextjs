@@ -122,7 +122,7 @@ export default function Header() {
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <ul className="flex flex-col items-center justify-center gap-8 pt-16">
+        <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-accent/90">
           {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
             <li key={item.href}>
               <Link
