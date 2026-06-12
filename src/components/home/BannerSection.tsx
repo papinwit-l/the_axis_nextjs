@@ -11,14 +11,17 @@ const SLIDES = [
   // },
   {
     src: "/images/banner/banner-image-01.png",
+    mobileSrc: "/images/banner/banner-image-mobile-01.png",
     alt: "banner-01",
   },
   {
     src: "/images/banner/banner-image-02.png",
+    mobileSrc: "/images/banner/banner-image-mobile-02.png",
     alt: "banner-02",
   },
   {
     src: "/images/banner/banner-image-03.png",
+    mobileSrc: "/images/banner/banner-image-mobile-03.png",
     alt: "banner-03",
   },
 ];
@@ -27,6 +30,7 @@ const AUTO_PLAY_INTERVAL = 6000;
 
 type BannerSlide = {
   src: string;
+  mobileSrc: string;
   alt: string;
 };
 
@@ -71,11 +75,21 @@ export default function BannerSection() {
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
+          {/* Desktop */}
           <Image
             src={slide.src}
             alt={slide.alt}
             fill
-            className="object-cover"
+            className="object-cover hidden lg:block"
+            priority={index === 0}
+            sizes="100vw"
+          />
+          {/* Mobile */}
+          <Image
+            src={slide.mobileSrc}
+            alt={slide.alt}
+            fill
+            className="object-cover block lg:hidden"
             priority={index === 0}
             sizes="100vw"
           />
