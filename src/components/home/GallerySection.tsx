@@ -37,13 +37,13 @@ export default function GallerySection({ data }: { data: GalleryData }) {
   };
 
   return (
-    <section id="gallery" className="bg-accent py-14 lg:py-28">
+    <section id="gallery" className="bg-accent-light py-14 lg:py-28">
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Heading */}
         <div ref={headingRef} className="text-center mb-8 lg:mb-14">
-          {/* <Logo className={`mx-auto mb-2 h-3 text-secondary reveal ${hv}`} /> */}
+          {/* <Logo className={`mx-auto mb-2 h-3 text-accent reveal ${hv}`} /> */}
           <h2
-            className={`font-display text-2xl lg:text-4xl tracking-[0.15em] text-secondary uppercase mb-6 lg:mb-8 reveal reveal-delay-1 ${hv}`}
+            className={`font-display text-2xl lg:text-4xl tracking-[0.15em] text-accent uppercase mb-6 lg:mb-8 reveal reveal-delay-1 ${hv}`}
           >
             Gallery
           </h2>
@@ -58,8 +58,8 @@ export default function GallerySection({ data }: { data: GalleryData }) {
                 onClick={() => handleTabChange(tab)}
                 className={`font-body text-base lg:text-lg tracking-[0.05em] capitalize pb-1.5 transition-all duration-300 cursor-pointer ${
                   activeTab === tab
-                    ? "text-secondary border-b-2 border-secondary"
-                    : "text-secondary/80 border-b-2 border-transparent hover:text-secondary/50"
+                    ? "text-accent border-b-2 border-brown-500 hover:text-accent/80"
+                    : "text-accent/80 border-b-2 border-transparent hover:text-accent/50"
                 }`}
               >
                 {tab}
