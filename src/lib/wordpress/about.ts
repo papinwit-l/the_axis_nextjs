@@ -8,7 +8,7 @@ export interface AboutData {
 const FALLBACK: AboutData = {
   heading: ["WHERE EVERY MOMENT", "BECOMES A FAMILY LEGACY"],
   description:
-    "<p><em>Nestled along one of Bangkok's most beautiful roads,</em></p>\n\n<p><strong>The Axis Utthayan</strong> presents an exclusive collection of\n<strong>modern classic monochrome residences.</strong></p>\n\n<p>Designed with <em>timeless sophistication</em> and crafted for\n<em>multigenerational living,</em> each home stands as an enduring\nexpression of <strong>legacy</strong> —</p>\n\n<p><em>where refined living today becomes\na treasured inheritance tomorrow.</em></p>",
+    "<p><em>Nestled along one of Bangkok's most beautiful roads,</em></p>\n\n<p><strong>The Axis Utthayan</strong> presents an exclusive collection of\n<strong>modern classic monochrome residences.</strong></p>\n\n<p>Designed with <em>timeless sophistication</em> and crafted for\n<em>multigenerational living,</em> each home stands as an enduring\nexpression of <strong>legacy</strong></p>\n\n<p><em>where refined living today becomes\na treasured inheritance tomorrow.</em></p>",
 };
 
 export async function getAbout(): Promise<AboutData> {
