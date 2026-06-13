@@ -1,6 +1,6 @@
 import { getPosts } from "./api";
 
-interface AboutData {
+export interface AboutData {
   heading: string[];
   description: string; // raw HTML from WordPress WYSIWYG
 }
