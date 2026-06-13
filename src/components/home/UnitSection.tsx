@@ -201,7 +201,7 @@ export default function UnitSection() {
               alt={unit.name}
               fill
               className="object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 640px"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 100vw"
             />
           </div>
 

@@ -82,7 +82,7 @@ export default function BannerSection() {
             fill
             className="object-cover hidden lg:block"
             priority={index === 0}
-            sizes="100vw"
+            sizes="(max-width: 1023px) 0px, 100vw"
           />
           {/* Mobile */}
           <Image
@@ -91,7 +91,7 @@ export default function BannerSection() {
             fill
             className="object-cover block lg:hidden"
             priority={index === 0}
-            sizes="100vw"
+            sizes="(max-width: 1023px) 100vw, 0px"
           />
         </div>
       ))}
