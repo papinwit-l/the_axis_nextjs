@@ -1,15 +1,14 @@
 import { getPosts } from "./api";
 
-export type AboutData = {
+interface AboutData {
   heading: string[];
-  paragraphs: string[];
-};
+  description: string; // raw HTML from WordPress WYSIWYG
+}
 
 const FALLBACK: AboutData = {
   heading: ["WHERE EVERY MOMENT", "BECOMES A FAMILY LEGACY"],
-  paragraphs: [
-    `The AXIS is a boutique collection of private luxury pool villas nestled on Pattaya's eastern coastline, just 900 meters from Jomtien Beach.Taking its name from the Hawaiian word for "heavenly sea" a union of kai (ocean) and land (sky) — the project is conceived as more than a residence.It is a sanctuary where nature, architecture, and the rhythm of tropical living converge`,
-  ],
+  description:
+    "<p><em>Nestled along one of Bangkok's most beautiful roads,</em></p>\n\n<p><strong>The Axis Utthayan</strong> presents an exclusive collection of\n<strong>modern classic monochrome residences.</strong></p>\n\n<p>Designed with <em>timeless sophistication</em> and crafted for\n<em>multigenerational living,</em> each home stands as an enduring\nexpression of <strong>legacy</strong> —</p>\n\n<p><em>where refined living today becomes\na treasured inheritance tomorrow.</em></p>",
 };
 
 export async function getAbout(): Promise<AboutData> {
