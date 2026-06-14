@@ -42,11 +42,6 @@ const SLIDES = [
     mobileSrc: "/images/banner/banner-image-03-crop.jpg",
     alt: "banner-03",
   },
-  {
-    src: "/images/banner/banner-image-04.png",
-    mobileSrc: "/images/banner/banner-image-04-crop.jpg",
-    alt: "banner-04",
-  },
 ];
 
 const AUTO_PLAY_INTERVAL = 6000;
@@ -126,6 +121,7 @@ export default function BannerSection() {
       <div className="absolute z-30 bottom-18 lg:bottom-24 left-0 right-0 flex justify-center">
         <BannerConcept className="text-white w-[80vw] h-auto lg:w-[30vw]" />
       </div>
+
       {/* Left arrow */}
       <button
         onClick={prev}
