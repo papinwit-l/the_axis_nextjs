@@ -1,9 +1,10 @@
 "use client";
 
 import useScrollReveal from "@/hooks/useScrollReveal";
-import type { AboutData } from "@/lib/wordpress";
 import React from "react";
 import { WPContent } from "../ui/WPRender";
+import { AboutData } from "@/lib/wordpress";
+import Image from "next/image";
 
 export default function AboutSection({ data }: { data: AboutData }) {
   const { ref, isVisible } = useScrollReveal();
@@ -17,8 +18,30 @@ export default function AboutSection({ data }: { data: AboutData }) {
     >
       <div
         ref={ref}
-        className="max-w-full lg:max-w-[70vw] mx-auto px-6 lg:px-10 text-center"
+        className="max-w-full lg:max-w-[70vw] mx-auto px-8 lg:px-10 text-center"
       >
+        {/* Image */}
+        <div
+          className={`relative mb-10 lg:mb-20 aspect-[4/3] lg:aspect-[16/9] reveal reveal-delay-0 ${v}`}
+        >
+          {/* Desktop */}
+          <Image
+            src={data.image}
+            alt={data.imageAlt}
+            fill
+            className="object-cover hidden lg:block"
+            sizes="(max-width: 1023px) 0px, 70vw"
+          />
+          {/* Mobile */}
+          <Image
+            src={data.imageMobile}
+            alt={data.imageAlt}
+            fill
+            className="object-cover block lg:hidden"
+            sizes="(max-width: 1023px) 100vw, 0px"
+          />
+        </div>
+
         {/* Heading */}
         <h2
           className={`font-display text-2xl md:text-4xl lg:text-[2.75rem] leading-[1.3] tracking-[0.08em] md:tracking-[0.1em] text-accent uppercase mb-8 lg:mb-14 reveal reveal-delay-1 ${v}`}
