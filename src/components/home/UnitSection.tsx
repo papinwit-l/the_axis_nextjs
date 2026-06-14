@@ -113,7 +113,10 @@ export default function UnitSection() {
   if (!unit) return null;
 
   return (
-    <section id="unit" className="bg-secondary py-14 lg:py-28">
+    <section
+      id="unit"
+      className="bg-secondary py-14 lg:py-28 bg-[url('/images/bg-image-white.jpg')] bg-repeat"
+    >
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Section heading */}
         <div ref={headingRef} className="text-center mb-10 lg:mb-16">

@@ -24,7 +24,10 @@ export default function LocationSection({
   const iv = infoVisible ? "reveal--visible" : "";
 
   return (
-    <section id="location" className="bg-secondary py-20 lg:py-28">
+    <section
+      id="location"
+      className="bg-secondary py-20 lg:py-28 bg-[url('/images/bg-image-white.jpg')] bg-repeat"
+    >
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Heading */}
         <div ref={headingRef} className="text-center mb-6 lg:mb-8">
