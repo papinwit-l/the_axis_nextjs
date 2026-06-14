@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import BannerConcept from "../ui/BannerConcept";
 
 // Replace these with your actual banner images
 const SLIDES = [
@@ -9,20 +10,42 @@ const SLIDES = [
   //   src: "/images/banner/banner-01.jpg",
   //   alt: "Kailani luxury pool villa exterior view",
   // },
+  // Backup
+  // {
+  //   src: "/images/banner/banner-image-01.png",
+  //   mobileSrc: "/images/banner/banner-image-mobile-01.png",
+  //   alt: "banner-01",
+  // },
+  // {
+  //   src: "/images/banner/banner-image-02.png",
+  //   mobileSrc: "/images/banner/banner-image-mobile-02.png",
+  //   alt: "banner-02",
+  // },
+  // {
+  //   src: "/images/banner/banner-image-03.png",
+  //   mobileSrc: "/images/banner/banner-image-mobile-03.png",
+  //   alt: "banner-03",
+  // },
   {
     src: "/images/banner/banner-image-01.png",
-    mobileSrc: "/images/banner/banner-image-mobile-01.png",
+    mobileSrc: "/images/banner/banner-image-01-crop.jpg",
+    // mobileSrc: "/images/banner/banner-image-mobile-01.png",
     alt: "banner-01",
   },
   {
     src: "/images/banner/banner-image-02.png",
-    mobileSrc: "/images/banner/banner-image-mobile-02.png",
+    mobileSrc: "/images/banner/banner-image-02-crop.jpg",
     alt: "banner-02",
   },
   {
     src: "/images/banner/banner-image-03.png",
-    mobileSrc: "/images/banner/banner-image-mobile-03.png",
+    mobileSrc: "/images/banner/banner-image-03-crop.jpg",
     alt: "banner-03",
+  },
+  {
+    src: "/images/banner/banner-image-04.png",
+    mobileSrc: "/images/banner/banner-image-04-crop.jpg",
+    alt: "banner-04",
   },
 ];
 
@@ -99,6 +122,10 @@ export default function BannerSection() {
       {/* Subtle dark overlay for header readability */}
       <div className="absolute inset-0 z-20 bg-gradient-to-b from-black/30 via-transparent to-black/10 pointer-events-none" />
 
+      {/* Banner Concept */}
+      <div className="absolute z-30 bottom-18 lg:bottom-24 left-0 right-0 flex justify-center">
+        <BannerConcept className="text-white w-[80vw] h-auto lg:w-[30vw]" />
+      </div>
       {/* Left arrow */}
       <button
         onClick={prev}
