@@ -51,7 +51,7 @@ export default async function HomePage() {
       <UnitSection />
       <MasterPlanSection />
       <GallerySection data={galleryData} />
-      <VideoSection data={videoData} />
+      {/* <VideoSection data={videoData} /> */}
       <LocationSection location={locationData} contact={contactData} />
     </main>
   );
