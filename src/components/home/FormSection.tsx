@@ -50,39 +50,15 @@ export default function FormSection() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-10">
-          {/* Row 1: First Name / Last Name */}
+          {/* Row 1: Full Name / Mobile */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-2 ${v}`}
           >
             <div>
               <input
                 type="text"
-                name="firstName"
-                placeholder="First Name*"
-                required
-                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name*"
-                required
-                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
-              />
-            </div>
-          </div>
-
-          {/* Row 2: Email / Mobile */}
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-3 ${v}`}
-          >
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email*"
+                name="fullName"
+                placeholder="Full Name*"
                 required
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
@@ -93,6 +69,28 @@ export default function FormSection() {
                 name="mobile"
                 placeholder="Mobile Number*"
                 required
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
+              />
+            </div>
+          </div>
+
+          {/* Row 2: Email / Line ID */}
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-3 ${v}`}
+          >
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="lineId"
+                placeholder="Line ID"
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>

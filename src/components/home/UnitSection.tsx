@@ -59,7 +59,7 @@ const UNITS: UnitType[] = [
     ],
   },
   {
-    name: "Prive",
+    name: "Privé",
     usableArea: "336 SQ.M",
     landArea: "64.5 - 75.2 SQ.WAH",
     heroImage: "/images/unit/prive-hero.png",
