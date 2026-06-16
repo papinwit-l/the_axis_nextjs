@@ -133,7 +133,7 @@ export default function Footer({ contact }: { contact: ContactData }) {
               Terms and Conditions
             </Link>
             <span className="mx-2">·</span>
-            <span>© 2026 The Axis Utthayan</span>
+            <span>© 2026 CLL Land Public Company Limited</span>
           </p>
         </div>
       </div>
