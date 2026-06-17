@@ -52,7 +52,7 @@ const UNITS: UnitType[] = [
         rooms: [
           "Master Bedroom 2",
           "Walk-in Closet",
-          "Multi-purpose Room (Tea Room)",
+          "Multi-purpose Room",
           "Terrace",
         ],
       },
