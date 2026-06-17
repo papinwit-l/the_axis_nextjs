@@ -18,7 +18,8 @@ const FALLBACK: ContactData = {
   address: [
     // "Kailani Private Property, Pattaya City,",
     // "Bang Lamung District, Chon Buri 20150",
-    "88 Khwaeng Sala Thammasop, Khet Thawi Watthana, Krung Thep Maha Nakhon 10170",
+    // "88 Khwaeng Sala Thammasop, Khet Thawi Watthana, Krung Thep Maha Nakhon 10170",
+    "5 Utthyan 6 Alley, Utthaya-Aksa Road, Sala Thammasop, Thawi Watthana, Bangkok 10170",
   ],
   socials: [],
 };
