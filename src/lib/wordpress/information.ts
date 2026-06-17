@@ -18,10 +18,10 @@ const FALLBACK: InformationData = {
       value: "Utthayan - Aksa Road",
     },
     { label: "Land Area", value: "2 – 1 – 69 Rai" },
-    { label: "Residental Unit", value: "9 Unit." },
+    { label: "Residential Unit", value: "5 Units" },
     { label: "Home Area", value: "64.4 – 164.1 Sq.wah." },
     { label: "Property Type", value: "3 - Storey House" },
-    { label: "Archetecture", value: "Modern Classic Monochorme" },
+    { label: "Architecture", value: "Modern Classic Monochorme" },
   ],
 };
 

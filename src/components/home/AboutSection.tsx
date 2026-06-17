@@ -29,16 +29,8 @@ export default function AboutSection({ data }: { data: AboutData }) {
             src={data.image}
             alt={data.imageAlt}
             fill
-            className="object-cover hidden lg:block"
-            sizes="(max-width: 1023px) 0px, 70vw"
-          />
-          {/* Mobile */}
-          <Image
-            src={data.imageMobile}
-            alt={data.imageAlt}
-            fill
-            className="object-cover block lg:hidden"
-            sizes="(max-width: 1023px) 100vw, 0px"
+            className="object-cover"
+            sizes="(max-width: 1023px) 70vw, 100vw"
           />
         </div>
 

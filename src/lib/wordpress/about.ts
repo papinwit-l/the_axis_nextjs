@@ -2,7 +2,6 @@ import { getPosts } from "./api";
 
 export interface AboutData {
   image: string;
-  imageMobile: string;
   imageAlt: string;
   heading: string[];
   description: string; // raw HTML from WordPress WYSIWYG
@@ -10,7 +9,6 @@ export interface AboutData {
 
 const FALLBACK: AboutData = {
   image: "/images/about-image.png",
-  imageMobile: "/images/about-image-crop.png",
   imageAlt: "Concept Image",
   heading: ["WHERE EVERY MOMENT", "BECOMES A FAMILY LEGACY"],
   description:
