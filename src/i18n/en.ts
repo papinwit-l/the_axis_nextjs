@@ -46,4 +46,11 @@ export default {
   masterPlan: {
     heading: "Master Plan",
   },
+
+  gallery: {
+    heading: "Gallery",
+    subHeading: "",
+    exterior: "Exterior",
+    interior: "Interior",
+  },
 };

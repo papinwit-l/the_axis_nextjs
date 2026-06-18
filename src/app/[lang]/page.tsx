@@ -54,7 +54,7 @@ export default async function HomePage({ params }: Props) {
       {/* <UnitSection units={unitTypes} /> */}
       <UnitSection lang={lang} units={unitTypes} />
       <MasterPlanSection lang={lang} />
-      <GallerySection data={galleryData} />
+      <GallerySection lang={lang} data={galleryData} />
       {/* <VideoSection data={videoData} /> */}
       <LocationSection location={locationData} contact={contactData} />
     </main>

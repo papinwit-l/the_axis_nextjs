@@ -45,4 +45,11 @@ export default {
   masterPlan: {
     heading: "ผังโครงการ",
   },
+
+  gallery: {
+    heading: "แกลเลอรี",
+    subHeading: "ภาพโครงการ",
+    exterior: "ภายนอก",
+    interior: "ภายใน",
+  },
 };

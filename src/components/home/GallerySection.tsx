@@ -6,10 +6,19 @@ import Logo from "../ui/Logo";
 import ImageModal from "../ui/modals/ImageModal";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import type { GalleryData } from "@/lib/wordpress";
+import { getDictionary } from "@/i18n";
 
 type Tab = "exterior" | "interior";
 
-export default function GallerySection({ data }: { data: GalleryData }) {
+export default function GallerySection({
+  data,
+  lang,
+}: {
+  data: GalleryData;
+  lang: string;
+}) {
+  const t = getDictionary(lang).gallery;
+
   const [activeTab, setActiveTab] = useState<Tab>("exterior");
   const [tabTransition, setTabTransition] = useState(true);
   const [imageModalOpen, setImageModalOpen] = useState(false);
@@ -42,10 +51,11 @@ export default function GallerySection({ data }: { data: GalleryData }) {
         {/* Heading */}
         <div ref={headingRef} className="text-center mb-8 lg:mb-14">
           {/* <Logo className={`mx-auto mb-2 h-3 text-accent reveal ${hv}`} /> */}
+          {t.subHeading && <p>{t.subHeading}</p>}
           <h2
-            className={`font-display text-2xl lg:text-4xl tracking-[0.15em] text-accent uppercase mb-6 lg:mb-8 reveal reveal-delay-1 ${hv}`}
+            className={`${lang == "th" ? `font-body` : `font-display  tracking-[0.15em]`} text-2xl lg:text-4xl text-accent uppercase mb-6 lg:mb-8 reveal reveal-delay-1 ${hv}`}
           >
-            Gallery
+            {t.heading}
           </h2>
 
           {/* Tabs */}
@@ -62,7 +72,7 @@ export default function GallerySection({ data }: { data: GalleryData }) {
                     : "text-accent/80 border-b-2 border-transparent hover:text-accent/50"
                 }`}
               >
-                {tab}
+                {t[tab]}
               </button>
             ))}
           </div>
