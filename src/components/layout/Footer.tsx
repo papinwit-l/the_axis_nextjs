@@ -9,15 +9,26 @@ import {
 } from "../ui/SocialMediaIcon";
 import type { ContactData, SocialLink } from "@/lib/wordpress";
 
-const NAV_LINKS = [
-  { label: "HOME", href: "#" },
-  { label: "PROJECT CONCEPT", href: "#about" },
-  { label: "PROJECT INFO", href: "#information" },
-  { label: "UNIT TYPE", href: "#unit" },
-  { label: "GALLERY", href: "#gallery" },
-  { label: "LOCATION", href: "#location" },
-  { label: "CONTACT US", href: "#contact" },
-];
+const NAV_LINKS = {
+  th: [
+    { label: "หน้าแรก", href: "#" },
+    { label: "แนวคิดโครงการ", href: "#about" },
+    { label: "ข้อมูลโครงการ", href: "#information" },
+    { label: "แบบบ้าน", href: "#unit" },
+    { label: "แกลเลอรี", href: "#gallery" },
+    { label: "ทำเลที่ตั้ง", href: "#location" },
+    { label: "ติดต่อเรา", href: "#contact" },
+  ],
+  en: [
+    { label: "HOME", href: "#" },
+    { label: "PROJECT CONCEPT", href: "#about" },
+    { label: "PROJECT INFO", href: "#information" },
+    { label: "UNIT TYPE", href: "#unit" },
+    { label: "GALLERY", href: "#gallery" },
+    { label: "LOCATION", href: "#location" },
+    { label: "CONTACT US", href: "#contact" },
+  ],
+};
 
 const SOCIAL_ICON_MAP: Record<
   SocialLink["platform"] | "email",
@@ -30,7 +41,14 @@ const SOCIAL_ICON_MAP: Record<
   email: MailIcon,
 };
 
-export default function Footer({ contact }: { contact: ContactData }) {
+export default function Footer({
+  contact,
+  lang,
+}: {
+  contact: ContactData;
+  lang: string;
+}) {
+  const navItems = NAV_LINKS[lang as keyof typeof NAV_LINKS] ?? NAV_LINKS.en;
   const socialLinks: { platform: string; url: string }[] = [
     ...contact.socials,
     ...(contact.email
@@ -46,7 +64,7 @@ export default function Footer({ contact }: { contact: ContactData }) {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
             {/* Left: Logo */}
             <div className="lg:flex-1">
-              <Link href="#" className="inline-block">
+              <Link href={`/${lang}`} className="inline-block">
                 <FullLogo className="text-secondary h-24 lg:h-32" />
               </Link>
             </div>
@@ -56,7 +74,7 @@ export default function Footer({ contact }: { contact: ContactData }) {
               {/* Nav links — single column */}
               <nav className="mb-8 lg:mb-10">
                 <ul className="flex flex-col gap-0">
-                  {NAV_LINKS.map((item) => (
+                  {navItems.map((item) => (
                     <li key={item.href + item.label}>
                       <Link
                         href={item.href}
@@ -120,14 +138,14 @@ export default function Footer({ contact }: { contact: ContactData }) {
         <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10 flex items-center justify-center">
           <p className="font-body text-xs text-brown-500 text-center">
             <Link
-              href="#"
+              href={`/${lang}/privacy-policy`}
               className="hover:text-accent transition-colors duration-300"
             >
               Privacy Policy
             </Link>
             <span className="mx-2">·</span>
             <Link
-              href="#"
+              href={`/${lang}/terms-and-conditions`}
               className="hover:text-accent transition-colors duration-300"
             >
               Terms and Conditions

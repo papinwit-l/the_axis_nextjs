@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getContact } from "@/lib/wordpress";
@@ -50,10 +50,22 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
-  return children;
+  params: Promise<{ lang: string }>;
+};
+
+export default async function LangLayout({ children, params }: Props) {
+  const { lang } = await params;
+  const contactData = await getContact();
+
+  return (
+    <html lang={lang}>
+      <body className="min-h-screen flex flex-col antialiased">
+        <Header lang={lang} />
+        <div className="flex-1">{children}</div>
+        <Footer contact={contactData} lang={lang} />
+      </body>
+    </html>
+  );
 }

@@ -18,7 +18,11 @@ import {
   getVideo,
 } from "@/lib/wordpress";
 
-export default async function HomePage() {
+type Props = { params: Promise<{ lang: string }> };
+
+export default async function HomePage({ params }: Props) {
+  const { lang } = await params;
+
   const [
     bannerSlides,
     aboutData,
@@ -55,4 +59,8 @@ export default async function HomePage() {
       <LocationSection location={locationData} contact={contactData} />
     </main>
   );
+}
+
+export function generateStaticParams() {
+  return [{ lang: "th" }, { lang: "en" }];
 }

@@ -5,21 +5,40 @@ import Logo from "@/components/ui/Logo";
 import Link from "next/link";
 import FullLogo from "../ui/FullLogo";
 
-const NAV_LEFT = [
-  { label: "PROJECT CONCEPT", href: "#about" },
-  { label: "PROJECT INFO", href: "#information" },
-  { label: "UNIT TYPE", href: "#unit" },
-];
+// Nav labels per language
+const NAV_LEFT = {
+  th: [
+    { label: "แนวคิดโครงการ", href: "#about" },
+    { label: "ข้อมูลโครงการ", href: "#information" },
+    { label: "แบบบ้าน", href: "#unit" },
+  ],
+  en: [
+    { label: "PROJECT CONCEPT", href: "#about" },
+    { label: "PROJECT INFO", href: "#information" },
+    { label: "UNIT TYPE", href: "#unit" },
+  ],
+};
 
-const NAV_RIGHT = [
-  { label: "GALLERY", href: "#gallery" },
-  { label: "LOCATION", href: "#location" },
-  { label: "CONTACT US", href: "#contact" },
-];
+const NAV_RIGHT = {
+  th: [
+    { label: "แกลเลอรี", href: "#gallery" },
+    { label: "ทำเลที่ตั้ง", href: "#location" },
+    { label: "ติดต่อเรา", href: "#contact" },
+  ],
+  en: [
+    { label: "GALLERY", href: "#gallery" },
+    { label: "LOCATION", href: "#location" },
+    { label: "CONTACT US", href: "#contact" },
+  ],
+};
 
-export default function Header() {
+export default function Header({ lang }: { lang: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const leftItems = NAV_LEFT[lang as keyof typeof NAV_LEFT] ?? NAV_LEFT.en;
+  const rightItems = NAV_RIGHT[lang as keyof typeof NAV_RIGHT] ?? NAV_RIGHT.en;
+  const otherLang = lang === "th" ? "en" : "th";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -49,11 +68,11 @@ export default function Header() {
         <nav className="flex items-center justify-between h-20 lg:h-24">
           {/* Left nav — desktop only */}
           <ul className="hidden lg:flex items-center gap-8">
-            {NAV_LEFT.map((item) => (
+            {leftItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-body text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300"
+                  className={`font-body ${lang == "th" && "text-[14px]"} text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300`}
                 >
                   {item.label}
                 </Link>
@@ -77,16 +96,24 @@ export default function Header() {
 
           {/* Right nav — desktop only */}
           <ul className="hidden lg:flex items-center gap-8">
-            {NAV_RIGHT.map((item) => (
+            {rightItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-body text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300"
+                  className={`font-body ${lang == "th" && "text-[14px]"} text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={`/${otherLang}`}
+                className="font-body text-[11px] font-normal tracking-[0.2em] text-gold hover:text-white transition-colors duration-300 border-l border-white/20 pl-8"
+              >
+                {otherLang.toUpperCase()}
+              </Link>
+            </li>
           </ul>
 
           {/* Mobile hamburger */}
@@ -123,7 +150,7 @@ export default function Header() {
         }`}
       >
         <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-accent/90">
-          {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
+          {[...leftItems, ...rightItems].map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
