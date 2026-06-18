@@ -53,7 +53,7 @@ export default async function HomePage({ params }: Props) {
       <InformationSection lang={lang} data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
       <UnitSection lang={lang} units={unitTypes} />
-      <MasterPlanSection />
+      <MasterPlanSection lang={lang} />
       <GallerySection data={galleryData} />
       {/* <VideoSection data={videoData} /> */}
       <LocationSection location={locationData} contact={contactData} />

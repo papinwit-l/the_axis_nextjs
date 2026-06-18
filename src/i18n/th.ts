@@ -41,4 +41,8 @@ export default {
     usableArea: "พื้นที่ใช้สอย",
     landArea: "ขนาดที่ดิน",
   },
+
+  masterPlan: {
+    heading: "ผังโครงการ",
+  },
 };

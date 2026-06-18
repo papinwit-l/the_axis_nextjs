@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import { getDictionary } from "@/i18n";
 
-export default function MasterPlanSection() {
+export default function MasterPlanSection({ lang }: { lang: string }) {
+  const t = getDictionary(lang).masterPlan;
+
   const { ref, isVisible } = useScrollReveal();
   const v = isVisible ? "reveal--visible" : "";
 
@@ -14,9 +17,9 @@ export default function MasterPlanSection() {
         className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10"
       >
         <h2
-          className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase text-center mb-10 lg:mb-16 reveal ${v}`}
+          className={`${lang == "th" ? `font-body` : `font-display tracking-[0.15em]`} text-3xl lg:text-4xl text-accent uppercase text-center mb-10 lg:mb-16 reveal ${v}`}
         >
-          Master Plan
+          {t.heading}
         </h2>
         <div
           className={`relative aspect-[16/10] reveal-scale ${isVisible ? "reveal-scale--visible" : ""}`}

@@ -42,4 +42,8 @@ export default {
     usableArea: "Usable Area",
     landArea: "Land Area",
   },
+
+  masterPlan: {
+    heading: "Master Plan",
+  },
 };
