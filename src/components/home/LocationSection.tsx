@@ -128,13 +128,13 @@ export default function LocationSection({
           {/* Right: Distance groups */}
           <div ref={infoRef} className="flex flex-col gap-8 lg:gap-10 lg:py-2">
             {/* Address */}
-            {contact.address.length > 0 && (
+            {location.address.length > 0 && (
               <div className={`reveal ${iv}`}>
                 <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
                   {t.address}
                 </h3>
                 <p className="font-body text-sm text-accent/70 tracking-[0.02em] leading-relaxed">
-                  {contact.address.map((line, i) => (
+                  {location.address.map((line, i) => (
                     <span key={i}>
                       {i > 0 && <br />}
                       {line}
