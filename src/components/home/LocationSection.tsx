@@ -4,16 +4,21 @@ import { useState } from "react";
 import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import type { LocationData, ContactData } from "@/lib/wordpress";
+import { getDictionary } from "@/i18n";
 
 type MapView = "graphic" | "google";
 
 export default function LocationSection({
   location,
   contact,
+  lang,
 }: {
   location: LocationData;
   contact: ContactData;
+  lang: string;
 }) {
+  const t = getDictionary(lang).location;
+
   const [mapView, setMapView] = useState<MapView>("graphic");
   const { ref: headingRef, isVisible: headingVisible } = useScrollReveal();
   const { ref: mapRef, isVisible: mapVisible } = useScrollReveal();
@@ -32,9 +37,9 @@ export default function LocationSection({
         {/* Heading */}
         <div ref={headingRef} className="text-center mb-6 lg:mb-8">
           <h2
-            className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase mb-6 reveal reveal-delay-1 ${hv}`}
+            className={`${lang == "th" ? `font-body` : `font-display tracking-[0.15em]`} text-3xl lg:text-4xl text-accent uppercase mb-6 reveal reveal-delay-1 ${hv}`}
           >
-            Location
+            {t.heading}
           </h2>
           {location.description && (
             <p
@@ -126,7 +131,7 @@ export default function LocationSection({
             {contact.address.length > 0 && (
               <div className={`reveal ${iv}`}>
                 <h3 className="font-body text-sm font-bold tracking-[0.1em] uppercase text-accent mb-3">
-                  Address
+                  {t.address}
                 </h3>
                 <p className="font-body text-sm text-accent/70 tracking-[0.02em] leading-relaxed">
                   {contact.address.map((line, i) => (

@@ -57,7 +57,7 @@ type Props = {
 
 export default async function LangLayout({ children, params }: Props) {
   const { lang } = await params;
-  const contactData = await getContact();
+  const contactData = await getContact(lang);
 
   return (
     <>

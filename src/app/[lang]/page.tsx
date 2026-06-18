@@ -39,8 +39,8 @@ export default async function HomePage({ params }: Props) {
     getGallery(),
     getUnitTypes(lang),
     getVideo(),
-    getContact(),
-    getLocation(),
+    getContact(lang),
+    getLocation(lang),
   ]);
 
   // console.log(aboutData);
@@ -56,7 +56,11 @@ export default async function HomePage({ params }: Props) {
       <MasterPlanSection lang={lang} />
       <GallerySection lang={lang} data={galleryData} />
       {/* <VideoSection data={videoData} /> */}
-      <LocationSection location={locationData} contact={contactData} />
+      <LocationSection
+        lang={lang}
+        location={locationData}
+        contact={contactData}
+      />
     </main>
   );
 }

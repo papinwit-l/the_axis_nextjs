@@ -53,4 +53,9 @@ export default {
     exterior: "Exterior",
     interior: "Interior",
   },
+
+  location: {
+    heading: "Location",
+    address: "Address",
+  },
 };

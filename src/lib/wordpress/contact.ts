@@ -12,48 +12,62 @@ export type ContactData = {
   socials: SocialLink[];
 };
 
-const FALLBACK: ContactData = {
-  phone: "+66123456789",
-  email: "info@theaxis.com",
-  address: [
-    // "Kailani Private Property, Pattaya City,",
-    // "Bang Lamung District, Chon Buri 20150",
-    // "88 Khwaeng Sala Thammasop, Khet Thawi Watthana, Krung Thep Maha Nakhon 10170",
-    "5 Utthyan 6 Alley, Utthaya-Aksa Road, Sala Thammasop, Thawi Watthana, Bangkok 10170",
-  ],
-  socials: [],
+const FALLBACK: Record<string, ContactData> = {
+  th: {
+    phone: "+66123456789",
+    email: "info@theaxis.com",
+    address: [
+      "5 ซอยอุทยาน 6 ถนนอุทยาน-อักษะ",
+      "แขวงศาลาธรรมสพน์ เขตทวีวัฒนา กรุงเทพฯ 10170",
+    ],
+    socials: [],
+  },
+  en: {
+    phone: "+66123456789",
+    email: "info@theaxis.com",
+    address: [
+      "5 Utthyan 6 Alley, Utthaya-Aksa Road,",
+      "Sala Thammasop, Thawi Watthana, Bangkok 10170",
+    ],
+    socials: [],
+  },
 };
 
-export async function getContact(): Promise<ContactData> {
-  try {
-    return FALLBACK;
-    const posts = await getPosts("contact", { per_page: 1 }, { embed: false });
-    const post = posts[0];
-    if (!post) return FALLBACK;
+export async function getContact(lang: string = "en"): Promise<ContactData> {
+  const fallback = FALLBACK[lang] ?? FALLBACK.en;
 
-    const acf = post.acf as Record<string, string>;
+  return fallback;
 
-    const socialMap: { key: string; platform: SocialLink["platform"] }[] = [
-      { key: "instagram_url", platform: "instagram" },
-      { key: "facebook_url", platform: "facebook" },
-      { key: "line_url", platform: "line" },
-      { key: "whatsapp_url", platform: "whatsapp" },
-    ];
+  // try {
+  //   const posts = await getPosts("contact", { per_page: 1 }, { embed: false });
+  //   const post = posts[0];
+  //   if (!post) return fallback;
 
-    return {
-      phone: acf.phone || FALLBACK.phone,
-      email: acf.email || FALLBACK.email,
-      address: acf.address
-        ? acf.address.split(/\r?\n/).filter(Boolean)
-        : FALLBACK.address,
-      socials: socialMap
-        .filter((s) => acf[s.key])
-        .map((s) => ({
-          platform: s.platform,
-          url: acf[s.key],
-        })),
-    };
-  } catch {
-    return FALLBACK;
-  }
+  //   const acf = post.acf as Record<string, string | undefined>;
+
+  //   const socialMap: { key: string; platform: SocialLink["platform"] }[] = [
+  //     { key: "instagram_url", platform: "instagram" },
+  //     { key: "facebook_url", platform: "facebook" },
+  //     { key: "line_url", platform: "line" },
+  //     { key: "whatsapp_url", platform: "whatsapp" },
+  //   ];
+
+  //   const address = acf[`address_${lang}`] ?? acf.address;
+
+  //   return {
+  //     phone: acf.phone || fallback.phone,
+  //     email: acf.email || fallback.email,
+  //     address: address
+  //       ? address.split(/\r?\n/).filter(Boolean)
+  //       : fallback.address,
+  //     socials: socialMap
+  //       .filter((s) => acf[s.key])
+  //       .map((s) => ({
+  //         platform: s.platform,
+  //         url: acf[s.key]!,
+  //       })),
+  //   };
+  // } catch {
+  //   return fallback;
+  // }
 }

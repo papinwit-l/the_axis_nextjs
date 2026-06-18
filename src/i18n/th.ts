@@ -52,4 +52,9 @@ export default {
     exterior: "ภายนอก",
     interior: "ภายใน",
   },
+
+  location: {
+    heading: "ทำเลที่ตั้ง",
+    address: "ที่อยู่โครงการ",
+  },
 };
