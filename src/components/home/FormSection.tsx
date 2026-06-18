@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import FullLogo from "../ui/FullLogo";
+import { getDictionary } from "@/i18n";
 
 const HEAR_ABOUT_OPTIONS = [
   "Google Search",
@@ -15,9 +16,10 @@ const HEAR_ABOUT_OPTIONS = [
   "Other",
 ];
 
-export default function FormSection() {
+export default function FormSection({ lang }: { lang: string }) {
   const [accepted, setAccepted] = useState(false);
   const { ref, isVisible } = useScrollReveal();
+  const t = getDictionary(lang).form;
 
   const v = isVisible ? "reveal--visible" : "";
 
@@ -32,25 +34,21 @@ export default function FormSection() {
         ref={ref}
         className="max-w-[var(--container-narrow)] mx-auto px-6 lg:px-10"
       >
-        {/* Heading */}
         <div className="text-center mb-8 lg:mb-16">
           <FullLogo className={`mx-auto mb-16 text-accent h-16 reveal ${v}`} />
-
           <h2
             className={`font-display text-accent text-3xl lg:text-4xl tracking-[0.2em] uppercase mb-4 reveal reveal-delay-1 ${v}`}
           >
-            Register
+            {t.heading}
           </h2>
           <p
             className={`font-body text-xs lg:text-sm tracking-[0.15em] uppercase text-accent reveal reveal-delay-2 ${v}`}
           >
-            Register for more information with exclusive privileges.
+            {t.subheading}
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-10">
-          {/* Row 1: Full Name / Mobile */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-2 ${v}`}
           >
@@ -58,7 +56,7 @@ export default function FormSection() {
               <input
                 type="text"
                 name="fullName"
-                placeholder="Full Name*"
+                placeholder={t.fullName}
                 required
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
@@ -67,14 +65,13 @@ export default function FormSection() {
               <input
                 type="tel"
                 name="mobile"
-                placeholder="Mobile Number*"
+                placeholder={t.mobile}
                 required
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
           </div>
 
-          {/* Row 2: Email / Line ID */}
           <div
             className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-3 ${v}`}
           >
@@ -82,7 +79,7 @@ export default function FormSection() {
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={t.email}
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
@@ -90,13 +87,12 @@ export default function FormSection() {
               <input
                 type="text"
                 name="lineId"
-                placeholder="Line ID"
+                placeholder={t.lineId}
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-accent text-sm font-body placeholder:text-accent outline-none focus:border-brown-800 transition-colors duration-300"
               />
             </div>
           </div>
 
-          {/* Row 3: How did you hear about us */}
           <div className={`reveal reveal-delay-4 ${v}`}>
             <div className="relative">
               <select
@@ -105,9 +101,9 @@ export default function FormSection() {
                 className="w-full py-3 bg-transparent border-b border-accent/40 text-sm font-body text-accent outline-none appearance-none cursor-pointer focus:border-brown-800 transition-colors duration-300"
               >
                 <option value="" disabled>
-                  How did you hear about us?
+                  {t.hearAbout}
                 </option>
-                {HEAR_ABOUT_OPTIONS.map((option) => (
+                {t.hearOptions.map((option) => (
                   <option
                     key={option}
                     value={option}
@@ -117,7 +113,6 @@ export default function FormSection() {
                   </option>
                 ))}
               </select>
-              {/* Dropdown arrow */}
               <svg
                 width="12"
                 height="8"
@@ -136,7 +131,6 @@ export default function FormSection() {
             </div>
           </div>
 
-          {/* Register button */}
           <div
             className={`flex justify-center pt-4 reveal reveal-delay-5 ${v}`}
           >
@@ -144,13 +138,12 @@ export default function FormSection() {
               type="submit"
               className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer"
             >
-              Register
+              {t.register}
             </button>
           </div>
 
-          {/* Privacy policy checkbox */}
           <div
-            className={`flex items-start gap-3 pt-2 reveal reveal-delay-5 ${v}`}
+            className={`flex items-start justify-center gap-3 pt-2 reveal reveal-delay-5 ${v}`}
           >
             <input
               type="checkbox"
@@ -163,14 +156,14 @@ export default function FormSection() {
               htmlFor="privacy"
               className="font-body text-[10px] lg:text-xs tracking-[0.05em] uppercase text-accent leading-relaxed cursor-pointer"
             >
-              Accept I have read and accept the{" "}
+              {t.privacy}{" "}
               <Link
-                href="#"
+                href={`/${lang}/privacy-policy`}
                 className="underline underline-offset-2 hover:text-brown-800 transition-colors duration-300"
               >
-                Privacy Policys
+                {t.privacyLink}
               </Link>{" "}
-              which contains the details of the protection of my personal data.
+              {t.privacySuffix}
             </label>
           </div>
         </form>

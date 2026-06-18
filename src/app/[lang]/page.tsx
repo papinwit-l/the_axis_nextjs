@@ -48,7 +48,7 @@ export default async function HomePage({ params }: Props) {
     <main>
       {/* <BannerSection slides={bannerSlides} /> */}
       <BannerSection lang={lang} />
-      <FormSection />
+      <FormSection lang={lang} />
       <AboutSection data={aboutData} />
       <InformationSection data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
