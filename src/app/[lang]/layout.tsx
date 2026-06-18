@@ -60,12 +60,10 @@ export default async function LangLayout({ children, params }: Props) {
   const contactData = await getContact();
 
   return (
-    <html lang={lang}>
-      <body className="min-h-screen flex flex-col antialiased">
-        <Header lang={lang} />
-        <div className="flex-1">{children}</div>
-        <Footer contact={contactData} lang={lang} />
-      </body>
-    </html>
+    <>
+      <Header lang={lang} />
+      <div className="flex-1">{children}</div>
+      <Footer contact={contactData} lang={lang} />
+    </>
   );
 }

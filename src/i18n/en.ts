@@ -35,4 +35,11 @@ export default {
   information: {
     heading: "Information",
   },
+
+  unit: {
+    heading: "Unit Type",
+    subHeading: "",
+    usableArea: "Usable Area",
+    landArea: "Land Area",
+  },
 };

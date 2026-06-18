@@ -2,98 +2,19 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import MockImage from "../ui/MockImage";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import { getDictionary } from "@/i18n";
+import { UnitTypeData } from "@/lib/wordpress";
 
-interface FloorPlan {
-  label: string;
-  src: string;
-  rooms: string[];
-}
+export default function UnitSection({
+  units,
+  lang,
+}: {
+  units: UnitTypeData[];
+  lang: string;
+}) {
+  const t = getDictionary(lang);
 
-interface UnitType {
-  name: string;
-  usableArea: string;
-  landArea: string;
-  heroImage: string;
-  floors: FloorPlan[];
-}
-
-const UNITS: UnitType[] = [
-  {
-    name: "Prime",
-    usableArea: "448 SQ.M",
-    landArea: "95.2 - 96.9 SQ.WAH",
-    heroImage: "/images/unit/prime-hero.png",
-    floors: [
-      {
-        label: "1st Floor",
-        src: "/images/unit/prime-1f.png",
-        rooms: [
-          "Double Volume Living Area",
-          "Bedroom 1",
-          "Elevator-Ready",
-          "Dining Area",
-          "Pantry Area",
-          "Kitchen Room",
-          "Powder Room",
-          "3-5 Parking Space",
-          "Maid Room",
-        ],
-      },
-      {
-        label: "2nd Floor",
-        src: "/images/unit/prime-2f.png",
-        rooms: ["Master Bedroom 1", "Bedroom 2", "Balcony", "Service Room"],
-      },
-      {
-        label: "3rd Floor",
-        src: "/images/unit/prime-3f.png",
-        rooms: [
-          "Master Bedroom 2",
-          "Walk-in Closet",
-          "Multi-purpose Room",
-          "Terrace",
-        ],
-      },
-    ],
-  },
-  {
-    name: "Privé",
-    usableArea: "336 SQ.M",
-    landArea: "64.5 - 75.2 SQ.WAH",
-    heroImage: "/images/unit/prive-hero.png",
-    floors: [
-      {
-        label: "1st Floor",
-        src: "/images/unit/prive-1f.png",
-        rooms: [
-          "Double Volume Living & Dining Area",
-          "Bedroom 1",
-          "Elevator-Ready",
-          "Pantry Area",
-          "Kitchen Room",
-          "Bathroom",
-          "3 Parking Space",
-          "Maid Room",
-        ],
-      },
-      {
-        label: "2nd Floor",
-        src: "/images/unit/prive-2f.png",
-        rooms: ["Bedroom 2", "Outdoor Terrace"],
-      },
-      {
-        label: "3rd Floor",
-        src: "/images/unit/prive-3f.png",
-        rooms: ["Bedroom 3", "Master Bedroom", "Flex Space"],
-      },
-    ],
-  },
-];
-
-export default function UnitSection() {
-  const units = UNITS;
   const [currentUnit, setCurrentUnit] = useState(0);
   const { ref: headingRef, isVisible: headingVisible } = useScrollReveal();
   const { ref: heroRef, isVisible: heroVisible } = useScrollReveal();
@@ -120,120 +41,97 @@ export default function UnitSection() {
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Section heading */}
         <div ref={headingRef} className="text-center mb-10 lg:mb-16">
+          {t.unit.subHeading && <p>{t.unit.subHeading}</p>}
           <h2
-            className={`font-display text-3xl lg:text-4xl tracking-[0.15em] text-accent uppercase reveal reveal-delay-1 ${hv}`}
+            className={`${lang == "th" ? "font-body" : "font-display tracking-[0.15em]"} text-3xl lg:text-4xl text-accent uppercase reveal reveal-delay-1 ${hv}`}
           >
-            Unit Type
+            {t.unit.heading}
           </h2>
         </div>
 
-        {/* Unit nav arrows + dots */}
+        {/* Unit nav — arrows overlay on hero */}
         {units.length > 1 && (
           <div
-            className={`flex items-center justify-center gap-6 mb-10 lg:mb-14 reveal ${hv}`}
+            ref={heroRef}
+            className={`relative mb-12 lg:mb-20 reveal-scale ${hev}`}
           >
+            {/* Hero image */}
+            <div className="relative aspect-[16/9]">
+              <Image
+                src={unit.heroImage}
+                alt={unit.name}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 100vw"
+              />
+            </div>
+
+            {/* Specs bar */}
+            <div className="bg-accent/85 backdrop-blur-sm px-6 lg:px-10 py-4 lg:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <h3 className="font-display text-2xl lg:text-3xl tracking-[0.2em] text-secondary uppercase">
+                {unit.name}
+              </h3>
+              <div className="flex gap-8 font-body text-sm">
+                <div>
+                  <span className="text-warm-400 text-xs uppercase tracking-[0.1em]">
+                    {t.unit.usableArea}
+                  </span>
+                  <p className="text-secondary font-semibold mt-0.5">
+                    {unit.usableArea}
+                  </p>
+                </div>
+                <div>
+                  <span className="text-warm-400 text-xs uppercase tracking-[0.1em]">
+                    {t.unit.landArea}
+                  </span>
+                  <p className="text-secondary font-semibold mt-0.5">
+                    {unit.landArea}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Prev arrow */}
             <button
               aria-label="Previous unit"
-              className="w-8 h-8 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
+              className="absolute left-2 lg:-left-14 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center bg-accent/60 lg:bg-transparent rounded-full text-white lg:text-brown-400 hover:text-brown-800 hover:bg-accent/80 lg:hover:bg-transparent transition-all duration-300 cursor-pointer disabled:opacity-30"
               onClick={() => handleUnitChange(currentUnit - 1)}
               disabled={currentUnit === 0}
             >
               <svg
-                width="12"
-                height="20"
-                viewBox="0 0 12 20"
+                viewBox="0 0 26 67"
                 fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3 h-6 lg:w-14 lg:h-14"
               >
-                <path d="M10 2L2 10L10 18" />
+                <path
+                  d="M0.376305 34.1962L23.1422 65.5836C23.3841 65.8995 23.6798 66.0751 24.0292 66.0751C24.728 66.0751 25.2925 65.338 25.2925 64.4251C25.2925 63.9687 25.1581 63.5475 24.9162 63.2667L2.98349 33.0378L24.9162 2.80847C25.1581 2.49249 25.2925 2.10644 25.2925 1.65003C25.2925 0.737188 24.728 0 24.0292 0C23.6798 0 23.3572 0.175597 23.1422 0.491579L0.376305 31.8789C0.1344 32.1949 0 32.5814 0 33.0378C0 33.4942 0.1344 33.9154 0.376305 34.1962Z"
+                  fill="currentColor"
+                />
               </svg>
             </button>
 
-            {units.map((u, i) => (
-              <button
-                key={u.name}
-                onClick={() => handleUnitChange(i)}
-                className={`font-display text-lg lg:text-xl tracking-[0.15em] uppercase transition-colors duration-300 cursor-pointer ${
-                  i === currentUnit
-                    ? "text-accent"
-                    : "text-brown-300 hover:text-brown-500"
-                }`}
-              >
-                {u.name}
-              </button>
-            ))}
-
+            {/* Next arrow */}
             <button
               aria-label="Next unit"
-              className="w-8 h-8 flex items-center justify-center text-brown-400 hover:text-brown-800 transition-colors duration-300 cursor-pointer disabled:opacity-30"
+              className="absolute right-2 lg:-right-14 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-14 lg:h-14 flex items-center justify-center bg-accent/60 lg:bg-transparent rounded-full text-white lg:text-brown-400 hover:text-brown-800 hover:bg-accent/80 lg:hover:bg-transparent transition-all duration-300 cursor-pointer disabled:opacity-30"
               onClick={() => handleUnitChange(currentUnit + 1)}
               disabled={currentUnit === units.length - 1}
             >
               <svg
-                width="12"
-                height="20"
-                viewBox="0 0 12 20"
+                viewBox="0 0 26 67"
                 fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3 h-6 lg:w-14 lg:h-14"
               >
-                <path d="M2 2L10 10L2 18" />
+                <path
+                  d="M24.9163 31.8789L2.15024 0.491579C1.90833 0.175597 1.61279 0 1.26337 0C0.564531 0 0 0.737188 0 1.65003C0 2.10644 0.134431 2.5276 0.376337 2.80847L22.309 33.0378L0.376337 63.2667C0.134431 63.5827 0 63.9687 0 64.4251C0 65.338 0.564531 66.0751 1.26337 66.0751C1.61279 66.0751 1.93521 65.8995 2.15024 65.5836L24.9163 34.1962C25.1582 33.8802 25.2925 33.4942 25.2925 33.0378C25.2925 32.5814 25.1582 32.1598 24.9163 31.8789Z"
+                  fill="currentColor"
+                />
               </svg>
             </button>
           </div>
         )}
-
-        {/* ===== Hero: Exterior image with specs overlay ===== */}
-        <div
-          ref={heroRef}
-          className={`relative mb-12 lg:mb-20 reveal-scale flex flex-col ${hev}`}
-        >
-          <div className="relative aspect-[16/9] ">
-            {/* swap MockImage → Image when assets arrive */}
-            {/* <MockImage
-              text={`${unit.name} Exterior`}
-              className="bg-warm-200 border border-dashed border-brown-300"
-            /> */}
-            <Image
-              src={unit.heroImage}
-              alt={unit.name}
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 100vw"
-            />
-          </div>
-
-          {/* Specs overlay bar at bottom */}
-          {/* <div className="absolute bottom-0 inset-x-0 bg-accent/85 backdrop-blur-sm px-6 lg:px-10 py-4 lg:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"> */}
-          <div className=" bg-accent/85 backdrop-blur-sm px-6 lg:px-10 py-4 lg:py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <h3 className="font-display text-2xl lg:text-3xl tracking-[0.2em] text-secondary uppercase">
-              {unit.name}
-            </h3>
-            <div className="flex gap-8 font-body text-sm">
-              <div>
-                <span className="text-warm-400 text-xs uppercase tracking-[0.1em]">
-                  Usable Area
-                </span>
-                <p className="text-secondary font-semibold mt-0.5">
-                  {unit.usableArea}
-                </p>
-              </div>
-              <div>
-                <span className="text-warm-400 text-xs uppercase tracking-[0.1em]">
-                  Land Area
-                </span>
-                <p className="text-secondary font-semibold mt-0.5">
-                  {unit.landArea}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* ===== Floor plans ===== */}
         {/* ===== Floor plans — equal 3-column grid ===== */}
@@ -261,7 +159,9 @@ export default function UnitSection() {
                 />
               </div>
               <div className="w-fit mx-auto text-center">
-                <h4 className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent mb-3">
+                <h4
+                  className={`${lang == "th" ? "font-body" : "font-display tracking-[0.15em]"} text-lg lg:text-xl text-accent mb-3`}
+                >
                   {floor.label}
                 </h4>
                 <ul className="font-body text-sm text-brown-500 leading-loose">

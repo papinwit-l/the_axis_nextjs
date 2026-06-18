@@ -55,5 +55,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <html>
+      <body className="min-h-screen flex flex-col antialiased">{children}</body>
+    </html>
+  );
 }

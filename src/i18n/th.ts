@@ -34,4 +34,11 @@ export default {
   information: {
     heading: "ข้อมูลโครงการ",
   },
+
+  unit: {
+    heading: "ประเภทบ้าน",
+    subHeading: "แบบบ้านภายในโครงการ",
+    usableArea: "พื้นที่ใช้สอย",
+    landArea: "ขนาดที่ดิน",
+  },
 };

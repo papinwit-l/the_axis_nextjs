@@ -37,7 +37,7 @@ export default async function HomePage({ params }: Props) {
     getAbout(lang),
     getInformation(lang),
     getGallery(),
-    getUnitTypes(),
+    getUnitTypes(lang),
     getVideo(),
     getContact(),
     getLocation(),
@@ -52,7 +52,7 @@ export default async function HomePage({ params }: Props) {
       <AboutSection lang={lang} data={aboutData} />
       <InformationSection lang={lang} data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
-      <UnitSection />
+      <UnitSection lang={lang} units={unitTypes} />
       <MasterPlanSection />
       <GallerySection data={galleryData} />
       {/* <VideoSection data={videoData} /> */}
