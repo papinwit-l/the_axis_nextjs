@@ -6,7 +6,13 @@ import { WPContent } from "../ui/WPRender";
 import { AboutData } from "@/lib/wordpress";
 import Image from "next/image";
 
-export default function AboutSection({ data }: { data: AboutData }) {
+export default function AboutSection({
+  data,
+  lang,
+}: {
+  data: AboutData;
+  lang: string;
+}) {
   const { ref, isVisible } = useScrollReveal();
 
   const v = isVisible ? "reveal--visible" : "";
@@ -36,7 +42,7 @@ export default function AboutSection({ data }: { data: AboutData }) {
 
         {/* Heading */}
         <h2
-          className={`font-display text-2xl md:text-4xl lg:text-[2.75rem] leading-[1.3] tracking-[0.08em] md:tracking-[0.1em] text-accent uppercase mb-8 lg:mb-14 reveal reveal-delay-1 ${v}`}
+          className={`${lang == "th" ? `font-body` : `font-display`} text-2xl md:text-4xl lg:text-[2.75rem] leading-[1.3] tracking-[0.08em] md:tracking-[0.1em] text-accent uppercase mb-8 lg:mb-14 reveal reveal-delay-1 ${v}`}
         >
           {data.heading.map((heading: string, index: number) => (
             <React.Fragment key={index}>

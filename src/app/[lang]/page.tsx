@@ -34,7 +34,7 @@ export default async function HomePage({ params }: Props) {
     locationData,
   ] = await Promise.all([
     getBanners(),
-    getAbout(),
+    getAbout(lang),
     getInformation(),
     getGallery(),
     getUnitTypes(),
@@ -49,7 +49,7 @@ export default async function HomePage({ params }: Props) {
       {/* <BannerSection slides={bannerSlides} /> */}
       <BannerSection lang={lang} />
       <FormSection lang={lang} />
-      <AboutSection data={aboutData} />
+      <AboutSection lang={lang} data={aboutData} />
       <InformationSection data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
       <UnitSection />
