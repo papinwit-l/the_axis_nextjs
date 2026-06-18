@@ -9,8 +9,8 @@ export default {
     contactUs: "ติดต่อเรา",
   },
   form: {
-    heading: "ลงทะเบียน",
-    subheading: "ลงทะเบียนเพื่อรับข้อมูลโครงการ",
+    heading: "ลงทะเบียนเพื่อรับข้อมูลโครงการ",
+    subheading: "",
     fullName: "ชื่อ-นามสกุล*",
     mobile: "เบอร์โทรศัพท์*",
     email: "อีเมล",

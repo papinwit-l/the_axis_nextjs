@@ -37,7 +37,7 @@ export default function FormSection({ lang }: { lang: string }) {
         <div className="text-center mb-8 lg:mb-16">
           <FullLogo className={`mx-auto mb-16 text-accent h-16 reveal ${v}`} />
           <h2
-            className={`${lang == "th" ? `font-body` : `font-display`} text-accent text-3xl lg:text-4xl tracking-[0.2em] uppercase mb-4 reveal reveal-delay-1 ${v}`}
+            className={`${lang == "th" ? `font-body` : `font-display tracking-[0.2em]`} text-accent text-3xl lg:text-4xl uppercase mb-4 reveal reveal-delay-1 ${v}`}
           >
             {t.heading}
           </h2>
