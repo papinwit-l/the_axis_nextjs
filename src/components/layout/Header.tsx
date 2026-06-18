@@ -149,7 +149,7 @@ export default function Header({ lang }: { lang: string }) {
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-accent/90">
+        <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-accent/95">
           {[...leftItems, ...rightItems].map((item) => (
             <li key={item.href}>
               <Link
@@ -161,6 +161,15 @@ export default function Header({ lang }: { lang: string }) {
               </Link>
             </li>
           ))}
+          <li className="pt-4 border-t border-white/20">
+            <Link
+              href={`/${otherLang}`}
+              className="font-body text-sm tracking-[0.2em] text-gold hover:text-white transition-colors duration-300"
+              onClick={handleNavClick}
+            >
+              {otherLang.toUpperCase()}
+            </Link>
+          </li>
         </ul>
       </div>
     </header>
