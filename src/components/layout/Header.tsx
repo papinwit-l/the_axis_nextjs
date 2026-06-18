@@ -82,7 +82,7 @@ export default function Header({ lang }: { lang: string }) {
 
           {/* Center logo */}
           <Link
-            href="#"
+            href={`/${lang}`}
             className="flex flex-col items-center justify-center gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full"
             onClick={handleNavClick}
           >

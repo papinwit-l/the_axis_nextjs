@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import BannerConcept from "../ui/BannerConcept";
+import { BannerConcept, BannerConceptTH } from "../ui/BannerConcept";
 
 // Replace these with your actual banner images
 const SLIDES = [
@@ -53,7 +53,7 @@ type BannerSlide = {
 };
 
 // export default function BannerSection({slides = SLIDES,}: {slides: BannerSlide[];}) {
-export default function BannerSection() {
+export default function BannerSection({ lang }: { lang: string }) {
   const slides = SLIDES;
   // console.log(slides);
   const [current, setCurrent] = useState(0);
@@ -119,7 +119,12 @@ export default function BannerSection() {
 
       {/* Banner Concept */}
       <div className="absolute z-30 bottom-18 lg:bottom-24 left-0 right-0 flex justify-center">
-        <BannerConcept className="text-white w-[80vw] h-auto lg:w-[30vw]" />
+        {/* <BannerConcept className="text-white w-[80vw] h-auto lg:w-[30vw]" /> */}
+        {lang === "th" ? (
+          <BannerConceptTH className="text-white w-[80vw] h-auto lg:w-[30vw]" />
+        ) : (
+          <BannerConcept className="text-white w-[80vw] h-auto lg:w-[30vw]" />
+        )}
       </div>
 
       {/* Left arrow */}
