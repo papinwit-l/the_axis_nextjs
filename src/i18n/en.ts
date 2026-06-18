@@ -58,4 +58,11 @@ export default {
     heading: "Location",
     address: "Address",
   },
+
+  footer: {
+    copyright:
+      "Copyright © © 2026 CLL Land Public Company Limited. All rights reserved.",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+  },
 };

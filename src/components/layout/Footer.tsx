@@ -8,6 +8,7 @@ import {
   WhatsAppIcon,
 } from "../ui/SocialMediaIcon";
 import type { ContactData, SocialLink } from "@/lib/wordpress";
+import { getDictionary } from "@/i18n";
 
 const NAV_LINKS = {
   th: [
@@ -55,6 +56,8 @@ export default function Footer({
       ? [{ platform: "email" as const, url: `mailto:${contact.email}` }]
       : []),
   ];
+
+  const t = getDictionary(lang).footer;
 
   return (
     <footer>
@@ -141,17 +144,17 @@ export default function Footer({
               href={`/${lang}/privacy-policy`}
               className="hover:text-accent transition-colors duration-300"
             >
-              Privacy Policy
+              {t.privacy}
             </Link>
             <span className="mx-2">·</span>
             <Link
               href={`/${lang}/terms-and-conditions`}
               className="hover:text-accent transition-colors duration-300"
             >
-              Terms and Conditions
+              {t.terms}
             </Link>
             <span className="mx-2">·</span>
-            <span>© 2026 CLL Land Public Company Limited</span>
+            <span>{t.copyright}</span>
           </p>
         </div>
       </div>
