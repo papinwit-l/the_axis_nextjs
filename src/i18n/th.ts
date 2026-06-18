@@ -30,4 +30,8 @@ export default {
     privacyLink: "นโยบายความเป็นส่วนตัว",
     privacySuffix: "",
   },
+
+  information: {
+    heading: "ข้อมูลโครงการ",
+  },
 };

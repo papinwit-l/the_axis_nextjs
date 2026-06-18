@@ -4,13 +4,18 @@ import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import type { InformationData } from "@/lib/wordpress";
 import { Fragment } from "react/jsx-runtime";
+import { getDictionary } from "@/i18n";
 
 export default function InformationSection({
   data,
+  lang,
 }: {
   data: InformationData;
+  lang: string;
 }) {
   const { ref, isVisible } = useScrollReveal();
+
+  const t = getDictionary(lang).information;
 
   const v = isVisible ? "reveal--visible" : "";
   const vl = isVisible ? "reveal-left--visible" : "";
@@ -46,9 +51,9 @@ export default function InformationSection({
             className={`flex flex-col justify-center lg:pl-16 lg:pr-8 lg:py-20 reveal-right ${vr}`}
           >
             <h2
-              className={`font-display text-2xl lg:text-[2.75rem] tracking-[0.2em] text-accent uppercase mb-10 lg:mb-14 reveal reveal-delay-2 ${v}`}
+              className={`${lang == "th" ? `font-body` : `font-display tracking-[0.2em]`} text-2xl lg:text-[2.75rem] text-accent uppercase mb-10 lg:mb-14 reveal reveal-delay-2 ${v}`}
             >
-              Information
+              {t.heading}
             </h2>
 
             <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 lg:gap-y-4">

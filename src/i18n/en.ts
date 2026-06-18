@@ -31,4 +31,8 @@ export default {
     privacySuffix:
       "which contains the details of the protection of my personal data.",
   },
+
+  information: {
+    heading: "Information",
+  },
 };
