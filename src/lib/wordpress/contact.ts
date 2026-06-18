@@ -16,18 +16,15 @@ const FALLBACK: Record<string, ContactData> = {
   th: {
     phone: "+66123456789",
     email: "info@theaxis.com",
-    address: [
-      "5 ซอยอุทยาน 6 ถนนอุทยาน-อักษะ",
-      "แขวงศาลาธรรมสพน์ เขตทวีวัฒนา กรุงเทพฯ 10170",
-    ],
+    address: ["88 แขวงศาลาธรรมสพน์", " เขตทวีวัฒนา กรุงเทพมหานคร 10170"],
     socials: [],
   },
   en: {
     phone: "+66123456789",
     email: "info@theaxis.com",
     address: [
-      "5 Utthyan 6 Alley, Utthaya-Aksa Road,",
-      "Sala Thammasop, Thawi Watthana, Bangkok 10170",
+      "88 Sala Thammasop Subdistrict,",
+      " Thawi Watthana District, Bangkok 10170",
     ],
     socials: [],
   },
