@@ -136,7 +136,7 @@ export default function FormSection({ lang }: { lang: string }) {
           >
             <button
               type="submit"
-              className="font-display text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer"
+              className={`${lang == "th" ? `font-body` : `font-display`} text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer`}
             >
               {t.register}
             </button>
