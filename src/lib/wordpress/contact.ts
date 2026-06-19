@@ -20,8 +20,8 @@ const FALLBACK: Record<string, ContactData> = {
     socials: [],
   },
   en: {
-    phone: "+66123456789",
-    email: "info@theaxis.com",
+    phone: "082-110-9000",
+    email: "info@clv.co.th",
     address: [
       "88 Sala Thammasop Subdistrict,",
       " Thawi Watthana District, Bangkok 10170",
