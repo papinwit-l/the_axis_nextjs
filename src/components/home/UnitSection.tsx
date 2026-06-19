@@ -40,13 +40,32 @@ export default function UnitSection({
     >
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Section heading */}
-        <div ref={headingRef} className="text-center mb-10 lg:mb-16">
+        <div ref={headingRef} className="text-center mb-10">
           {t.unit.subHeading && <p>{t.unit.subHeading}</p>}
           <h2
             className={`${lang == "th" ? "font-body" : "font-display tracking-[0.15em]"} text-3xl lg:text-4xl text-accent uppercase reveal reveal-delay-1 ${hv}`}
           >
             {t.unit.heading}
           </h2>
+        </div>
+
+        <div
+          className={`flex items-center justify-center gap-6 mb-10 lg:mb-14 reveal ${hv}`}
+        >
+          {units.length > 1 &&
+            units.map((u, i) => (
+              <button
+                key={u.name}
+                onClick={() => handleUnitChange(i)}
+                className={`font-display text-lg lg:text-xl tracking-[0.15em] uppercase transition-colors duration-300 cursor-pointer ${
+                  i === currentUnit
+                    ? "text-accent"
+                    : "text-brown-300 hover:text-brown-500"
+                }`}
+              >
+                {u.name}
+              </button>
+            ))}
         </div>
 
         {/* Unit nav — arrows overlay on hero */}
