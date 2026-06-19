@@ -14,8 +14,8 @@ export type ContactData = {
 
 const FALLBACK: Record<string, ContactData> = {
   th: {
-    phone: "+66123456789",
-    email: "info@theaxis.com",
+    phone: "082-110-9000",
+    email: "info@clv.co.th",
     address: ["88 แขวงศาลาธรรมสพน์", " เขตทวีวัฒนา กรุงเทพมหานคร 10170"],
     socials: [],
   },
