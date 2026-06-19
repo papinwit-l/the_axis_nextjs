@@ -64,7 +64,7 @@ const FALLBACK: Record<string, LocationData> = {
     description:
       "The project is situated on Utthayan Road, widely regarded as one of the most beautiful and prestigious avenues in Thailand. Located near Phutthamonthon, a vast public park spanning over 2,500 rai, the area offers abundant green space and fresh air, while also providing convenient access to major transportation routes and key road networks.",
     address: [
-      "5 Utthyan 6 Alley, Utthaya-Aksa Road,",
+      "5 Utthayan 6 Alley, Utthaya-Aksa Road,",
       "Sala Thammasop, Thawi Watthana, Bangkok 10170",
     ],
     distanceGroups: [
