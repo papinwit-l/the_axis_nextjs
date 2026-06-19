@@ -81,7 +81,7 @@ export default function Footer({
                     <li key={item.href + item.label}>
                       <Link
                         href={item.href}
-                        className="font-body text-xs tracking-[0.2em] text-secondary hover:text-secondary/80 transition-colors duration-300"
+                        className="font-body text-xs text-secondary hover:text-secondary/80 transition-colors duration-300"
                       >
                         {item.label}
                       </Link>
@@ -92,7 +92,7 @@ export default function Footer({
 
               {/* Address */}
               {contact.address.length > 0 && (
-                <p className="font-body text-sm tracking-[0.05em] text-secondary mb-4">
+                <p className="font-body text-sm text-secondary mb-4">
                   {contact.address.join(" ")}
                 </p>
               )}
