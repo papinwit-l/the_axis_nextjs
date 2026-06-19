@@ -62,7 +62,7 @@ const FALLBACK: Record<string, LocationData> = {
     googleMapsUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.672993380887!2d100.33018407509076!3d13.778885586615807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29109d47f60ed%3A0x16f3123e107630c9!2sTHE%20AXIS%20Utthayan!5e1!3m2!1sen!2sth!4v1781165790909!5m2!1sen!2sth",
     description:
-      "The project is located on Utthayan Road, a road considered the most beautiful and expensive in Thailand. It is located near Phutthamonthon, a large public park covering over 2,500 rai, a source of fresh air, and offers convenient transportation connections to major roads.",
+      "The project is situated on Utthayan Road, widely regarded as one of the most beautiful and prestigious avenues in Thailand. Located near Phutthamonthon, a vast public park spanning over 2,500 rai, the area offers abundant green space and fresh air, while also providing convenient access to major transportation routes and key road networks.",
     address: [
       "5 Utthyan 6 Alley, Utthaya-Aksa Road,",
       "Sala Thammasop, Thawi Watthana, Bangkok 10170",
