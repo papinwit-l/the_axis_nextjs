@@ -154,7 +154,7 @@ export default function Header({ lang }: { lang: string }) {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`${lang == "th" ? "font-body" : "font-display"} text-lg tracking-[0.25em] text-white/80 hover:text-gold transition-colors duration-300`}
+                className={`${lang == "th" ? "font-body" : "font-display tracking-[0.25em]"} text-lg text-white/80 hover:text-gold transition-colors duration-300`}
                 onClick={handleNavClick}
               >
                 {item.label}
