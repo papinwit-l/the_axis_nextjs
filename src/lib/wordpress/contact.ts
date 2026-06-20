@@ -16,15 +16,23 @@ const FALLBACK: Record<string, ContactData> = {
   th: {
     phone: "082-110-9000",
     email: "info@clv.co.th",
-    address: ["88 แขวงศาลาธรรมสพน์", " เขตทวีวัฒนา กรุงเทพมหานคร 10170"],
+    // address: ["88 แขวงศาลาธรรมสพน์", " เขตทวีวัฒนา กรุงเทพมหานคร 10170"],
+    address: [
+      "5 ซอยอุทยาน 6 ถนนอุทยาน-อักษะ",
+      "แขวงศาลาธรรมสพน์ เขตทวีวัฒนา กรุงเทพฯ 10170",
+    ],
     socials: [],
   },
   en: {
     phone: "082-110-9000",
     email: "info@clv.co.th",
+    // address: [
+    //   "88 Sala Thammasop Subdistrict,",
+    //   " Thawi Watthana District, Bangkok 10170",
+    // ],
     address: [
-      "88 Sala Thammasop Subdistrict,",
-      " Thawi Watthana District, Bangkok 10170",
+      "5 Utthayan 6 Alley, Utthaya-Aksa Road,",
+      "Sala Thammasop, Thawi Watthana, Bangkok 10170",
     ],
     socials: [],
   },
