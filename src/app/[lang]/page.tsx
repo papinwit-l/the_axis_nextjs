@@ -44,8 +44,8 @@ export default async function HomePage({ params }: Props) {
   ]);
 
   // console.log(bannerSlides);
-
   // console.log(aboutData);
+
   return (
     <main>
       <BannerSection lang={lang} slides={bannerSlides} />

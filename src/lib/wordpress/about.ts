@@ -1,4 +1,4 @@
-import { getPosts } from "./api";
+import { getAltText, getFeaturedMedia, getImageUrl, getPosts } from "./api";
 
 export interface AboutData {
   image: string;
@@ -30,31 +30,28 @@ const FALLBACK: Record<string, AboutData> = {
 export async function getAbout(lang: string = "en"): Promise<AboutData> {
   const fallback = FALLBACK[lang] ?? FALLBACK.en;
 
-  return fallback;
+  // return fallback;
 
-  // try {
-  //   const posts = await getPosts("about", { per_page: 1 });
-  //   const post = posts[0];
-  //   if (!post) return fallback;
+  try {
+    const posts = await getPosts("about", { per_page: 1 });
+    const post = posts[0];
+    if (!post) return fallback;
 
-  //   const acf = post.acf as Record<string, string | undefined>;
+    const media = getFeaturedMedia(post);
 
-  //   // e.g. heading_th / heading_en, description_th / description_en
-  //   const heading = acf[`heading_${lang}`] ?? acf.heading;
-  //   const description = acf[`description_${lang}`] ?? acf.description;
-  //   const image = acf.image ?? fallback.image;
-  //   const imageAlt =
-  //     acf[`image_alt_${lang}`] ?? acf.image_alt ?? fallback.imageAlt;
+    const heading = (post[`heading_${lang}`] as string) ?? null;
+    const description = (post[`description_${lang}`] as string) ?? null;
+    const imageAlt = (post[`image_alt_${lang}`] as string) ?? null;
 
-  //   return {
-  //     image,
-  //     imageAlt,
-  //     heading: heading
-  //       ? heading.split(/\r?\n/).filter(Boolean)
-  //       : fallback.heading,
-  //     description: description ?? fallback.description,
-  //   };
-  // } catch {
-  //   return fallback;
-  // }
+    return {
+      image: getImageUrl(media, "full") || fallback.image,
+      imageAlt: imageAlt ?? getAltText(media) ?? fallback.imageAlt,
+      heading: heading
+        ? heading.split(/\r?\n/).filter(Boolean)
+        : fallback.heading,
+      description: description ?? fallback.description,
+    };
+  } catch {
+    return fallback;
+  }
 }
