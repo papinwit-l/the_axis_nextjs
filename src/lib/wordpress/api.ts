@@ -1,6 +1,6 @@
 const WP_API_URL =
   process.env.NEXT_PUBLIC_WP_API_URL ||
-  "https://cms.kailanivilla.com/wp/wp-json/wp/v2";
+  "https://cms.theaxis-utthayan.com/wp-json/wp/v2";
 
 // ============================================
 // TYPES
@@ -24,6 +24,21 @@ export type WPMedia = {
   };
 };
 
+// export type WPPost = {
+//   id: number;
+//   title: { rendered: string };
+//   slug: string;
+//   status: string;
+//   menu_order: number;
+//   content?: { rendered: string };
+//   excerpt?: { rendered: string };
+//   featured_media: number;
+//   acf: Record<string, unknown>;
+//   _embedded?: {
+//     "wp:featuredmedia"?: WPMedia[];
+//   };
+// };
+
 export type WPPost = {
   id: number;
   title: { rendered: string };
@@ -33,10 +48,11 @@ export type WPPost = {
   content?: { rendered: string };
   excerpt?: { rendered: string };
   featured_media: number;
-  acf: Record<string, unknown>;
   _embedded?: {
     "wp:featuredmedia"?: WPMedia[];
   };
+  // Custom REST fields (added via rest_prepare filters)
+  [key: string]: unknown;
 };
 
 export type ImageSize =
