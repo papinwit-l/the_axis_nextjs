@@ -1,4 +1,4 @@
-import { wpFetch } from "./api";
+import { getLangArrayField, getLangField, wpFetch } from "./api";
 
 export type FloorPlan = {
   label: string;
@@ -14,19 +14,26 @@ export type UnitTypeData = {
   floors: FloorPlan[];
 };
 
+type WPFloorPlan = {
+  id: number;
+  label_th: string | null;
+  label_en: string | null;
+  image: string | null;
+  rooms_th: string[];
+  rooms_en: string[];
+  order: number;
+};
+
 type WPUnitTypeResponse = {
   id: number;
   title: { rendered: string };
   menu_order: number;
-  usable_area: string;
-  land_area: string;
-  hero_image: string | { guid: string };
-  floor_plans: {
-    ID: string;
-    post_title: string;
-    guid: string;
-  }[];
-  room_legend: string;
+  usable_area_th: string | null;
+  usable_area_en: string | null;
+  land_area_th: string | null;
+  land_area_en: string | null;
+  hero_image: string | null;
+  floor_plans: WPFloorPlan[];
 };
 
 const FALLBACK: Record<string, UnitTypeData[]> = {
@@ -190,8 +197,6 @@ export async function getUnitTypes(
 ): Promise<UnitTypeData[]> {
   const fallback = FALLBACK[lang] ?? FALLBACK.en;
 
-  return fallback;
-
   try {
     const posts = await wpFetch<WPUnitTypeResponse[]>("unit_type", {
       embed: false,
@@ -204,24 +209,17 @@ export async function getUnitTypes(
 
     if (!posts.length) return fallback;
 
-    return posts.map((post) => {
-      const heroImage =
-        typeof post.hero_image === "string"
-          ? post.hero_image
-          : (post.hero_image?.guid ?? "");
-
-      return {
-        name: post.title.rendered,
-        usableArea: post.usable_area ?? "",
-        landArea: post.land_area ?? "",
-        heroImage,
-        floors: (post.floor_plans || []).map((fp) => ({
-          label: fp.post_title,
-          src: fp.guid,
-          rooms: [], // rooms come from room_legend or per-floor ACF fields
-        })),
-      };
-    });
+    return posts.map((post) => ({
+      name: post.title.rendered,
+      usableArea: getLangField(post, "usable_area", lang) ?? "",
+      landArea: getLangField(post, "land_area", lang) ?? "",
+      heroImage: post.hero_image ?? "",
+      floors: (post.floor_plans || []).map((fp) => ({
+        label: getLangField(fp, "label", lang) ?? "",
+        src: fp.image ?? "",
+        rooms: getLangArrayField(fp, "rooms", lang),
+      })),
+    }));
   } catch {
     return fallback;
   }

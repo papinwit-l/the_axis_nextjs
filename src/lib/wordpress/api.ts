@@ -159,3 +159,33 @@ export function getAltText(
 ): string {
   return media?.alt_text || fallback;
 }
+
+// ============================================
+// TYPE HELPERS
+// ============================================
+
+export function getLangField<T extends Record<string, unknown>>(
+  obj: T,
+  field: string,
+  lang: string,
+  fallbackLang: string = "en",
+): string | null {
+  return (
+    (obj[`${field}_${lang}` as keyof T] as string) ??
+    (obj[`${field}_${fallbackLang}` as keyof T] as string) ??
+    null
+  );
+}
+
+export function getLangArrayField<T extends Record<string, unknown>>(
+  obj: T,
+  field: string,
+  lang: string,
+  fallbackLang: string = "en",
+): string[] {
+  return (
+    (obj[`${field}_${lang}` as keyof T] as string[]) ??
+    (obj[`${field}_${fallbackLang}` as keyof T] as string[]) ??
+    []
+  );
+}

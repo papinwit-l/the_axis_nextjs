@@ -46,6 +46,7 @@ export default async function HomePage({ params }: Props) {
   // console.log(bannerSlides);
   // console.log(aboutData);
   // console.log(informationData);
+  // console.log(unitTypes);
 
   return (
     <main>
