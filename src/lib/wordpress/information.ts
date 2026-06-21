@@ -60,14 +60,11 @@ export async function getInformation(
   const fallback = FALLBACK[lang] ?? FALLBACK.en;
   const fieldMap = FIELD_MAP[lang as keyof typeof FIELD_MAP] ?? FIELD_MAP.en;
 
-  return fallback;
-
   try {
     const posts = await getPosts("information", { per_page: 1 });
     const post = posts[0];
     if (!post) return fallback;
 
-    const acf = post.acf as Record<string, string>;
     const media = getFeaturedMedia(post);
 
     return {
@@ -76,10 +73,10 @@ export async function getInformation(
         alt: getAltText(media, fallback.image.alt),
       },
       details: fieldMap
-        .filter((f) => acf[`${f.key}_${lang}`] || acf[f.key])
+        .filter((f) => post[`${f.key}_${lang}`])
         .map((f) => ({
           label: f.label,
-          value: acf[`${f.key}_${lang}`] ?? acf[f.key],
+          value: post[`${f.key}_${lang}`] as string,
         })),
     };
   } catch {
