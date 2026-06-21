@@ -43,11 +43,13 @@ export default async function HomePage({ params }: Props) {
     getLocation(lang),
   ]);
 
+  // console.log(bannerSlides);
+
   // console.log(aboutData);
   return (
     <main>
-      {/* <BannerSection slides={bannerSlides} /> */}
-      <BannerSection lang={lang} />
+      <BannerSection lang={lang} slides={bannerSlides} />
+      {/* <BannerSection lang={lang} /> */}
       <FormSection lang={lang} />
       <AboutSection lang={lang} data={aboutData} />
       <InformationSection lang={lang} data={informationData} />

@@ -53,8 +53,14 @@ type BannerSlide = {
 };
 
 // export default function BannerSection({slides = SLIDES,}: {slides: BannerSlide[];}) {
-export default function BannerSection({ lang }: { lang: string }) {
-  const slides = SLIDES;
+export default function BannerSection({
+  lang,
+  slides,
+}: {
+  lang: string;
+  slides: BannerSlide[];
+}) {
+  // const slides = SLIDES;
   // console.log(slides);
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);

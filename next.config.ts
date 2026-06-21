@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cms.kailanivilla.com",
+        hostname: "cms.theaxis-utthayan.com",
+      },
+      {
+        protocol: "http",
+        hostname: "203.170.129.6",
       },
     ],
   },
