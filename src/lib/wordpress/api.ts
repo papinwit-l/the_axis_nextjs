@@ -1,6 +1,6 @@
 const WP_API_URL =
   process.env.NEXT_PUBLIC_WP_API_URL ||
-  "http://cms.theaxis-utthayan.com/wp-json/wp/v2";
+  "https://cms.theaxis-utthayan.com/wp-json/wp/v2";
 
 // ============================================
 // TYPES
