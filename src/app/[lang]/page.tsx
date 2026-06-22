@@ -17,6 +17,7 @@ import {
   getUnitTypes,
   getVideo,
 } from "@/lib/wordpress";
+import { getMasterPlan } from "@/lib/wordpress/master-plan";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -29,6 +30,7 @@ export default async function HomePage({ params }: Props) {
     informationData,
     galleryData,
     unitTypes,
+    masterPlanData,
     videoData,
     contactData,
     locationData,
@@ -38,6 +40,7 @@ export default async function HomePage({ params }: Props) {
     getInformation(lang),
     getGallery(),
     getUnitTypes(lang),
+    getMasterPlan(lang),
     getVideo(),
     getContact(lang),
     getLocation(lang),
@@ -47,6 +50,11 @@ export default async function HomePage({ params }: Props) {
   // console.log(aboutData);
   // console.log(informationData);
   // console.log(unitTypes);
+  // console.log(masterPlanData);
+  // console.log(galleryData);
+  // console.log(videoData);
+  // console.log(contactData);
+  // console.log(locationData);
 
   return (
     <main>
@@ -57,7 +65,7 @@ export default async function HomePage({ params }: Props) {
       <InformationSection lang={lang} data={informationData} />
       {/* <UnitSection units={unitTypes} /> */}
       <UnitSection lang={lang} units={unitTypes} />
-      <MasterPlanSection lang={lang} />
+      <MasterPlanSection lang={lang} data={masterPlanData} />
       <GallerySection lang={lang} data={galleryData} />
       {/* <VideoSection data={videoData} /> */}
       <LocationSection

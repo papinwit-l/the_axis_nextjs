@@ -1,4 +1,4 @@
-import { getPosts } from "./api";
+import { getLangField, getPosts } from "./api";
 
 export type SocialLink = {
   platform: "instagram" | "facebook" | "line" | "whatsapp";
@@ -10,6 +10,18 @@ export type ContactData = {
   email: string;
   address: string[];
   socials: SocialLink[];
+};
+
+type WPContactResponse = {
+  id: number;
+  phone: string | null;
+  email: string | null;
+  address_th: string | null;
+  address_en: string | null;
+  instagram_url: string | null;
+  facebook_url: string | null;
+  line_url: string | null;
+  whatsapp_url: string | null;
 };
 
 const FALLBACK: Record<string, ContactData> = {
@@ -38,41 +50,37 @@ const FALLBACK: Record<string, ContactData> = {
   },
 };
 
+const SOCIAL_MAP: { key: string; platform: SocialLink["platform"] }[] = [
+  { key: "instagram_url", platform: "instagram" },
+  { key: "facebook_url", platform: "facebook" },
+  { key: "line_url", platform: "line" },
+  { key: "whatsapp_url", platform: "whatsapp" },
+];
+
 export async function getContact(lang: string = "en"): Promise<ContactData> {
   const fallback = FALLBACK[lang] ?? FALLBACK.en;
 
-  return fallback;
+  try {
+    const posts = await getPosts("contact", { per_page: 1 }, { embed: false });
+    const post = posts[0] as unknown as WPContactResponse;
+    if (!post) return fallback;
 
-  // try {
-  //   const posts = await getPosts("contact", { per_page: 1 }, { embed: false });
-  //   const post = posts[0];
-  //   if (!post) return fallback;
+    const addressRaw = getLangField(post, "address", lang);
 
-  //   const acf = post.acf as Record<string, string | undefined>;
-
-  //   const socialMap: { key: string; platform: SocialLink["platform"] }[] = [
-  //     { key: "instagram_url", platform: "instagram" },
-  //     { key: "facebook_url", platform: "facebook" },
-  //     { key: "line_url", platform: "line" },
-  //     { key: "whatsapp_url", platform: "whatsapp" },
-  //   ];
-
-  //   const address = acf[`address_${lang}`] ?? acf.address;
-
-  //   return {
-  //     phone: acf.phone || fallback.phone,
-  //     email: acf.email || fallback.email,
-  //     address: address
-  //       ? address.split(/\r?\n/).filter(Boolean)
-  //       : fallback.address,
-  //     socials: socialMap
-  //       .filter((s) => acf[s.key])
-  //       .map((s) => ({
-  //         platform: s.platform,
-  //         url: acf[s.key]!,
-  //       })),
-  //   };
-  // } catch {
-  //   return fallback;
-  // }
+    return {
+      phone: post.phone ?? fallback.phone,
+      email: post.email ?? fallback.email,
+      address: addressRaw
+        ? addressRaw.split(/\r?\n/).filter(Boolean)
+        : fallback.address,
+      socials: SOCIAL_MAP.filter(
+        (s) => post[s.key as keyof WPContactResponse],
+      ).map((s) => ({
+        platform: s.platform,
+        url: post[s.key as keyof WPContactResponse] as string,
+      })),
+    };
+  } catch {
+    return fallback;
+  }
 }

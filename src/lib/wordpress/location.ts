@@ -1,4 +1,4 @@
-import { getPosts } from "./api";
+import { getPosts, getLangField } from "./api";
 
 export type DistanceGroup = {
   category: string;
@@ -11,6 +11,18 @@ export type LocationData = {
   description: string;
   address: string[];
   distanceGroups: DistanceGroup[];
+};
+
+type WPLocationResponse = {
+  id: number;
+  description_th: string | null;
+  description_en: string | null;
+  address_th: string | null;
+  address_en: string | null;
+  google_maps_url: string | null;
+  map_image: string | null;
+  distance_groups_th: DistanceGroup[];
+  distance_groups_en: DistanceGroup[];
 };
 
 const FALLBACK: Record<string, LocationData> = {
@@ -102,38 +114,28 @@ const FALLBACK: Record<string, LocationData> = {
 export async function getLocation(lang: string = "en"): Promise<LocationData> {
   const fallback = FALLBACK[lang] ?? FALLBACK.en;
 
-  return fallback;
+  try {
+    const posts = await getPosts("location", { per_page: 1 }, { embed: false });
+    const post = posts[0] as unknown as WPLocationResponse;
+    if (!post) return fallback;
 
-  // try {
-  //   const posts = await getPosts("location", { per_page: 1 }, { embed: false });
-  //   const post = posts[0];
-  //   if (!post) return fallback;
+    const description = getLangField(post, "description", lang);
+    const addressRaw = getLangField(post, "address", lang);
+    const distanceGroups =
+      lang === "th" ? post.distance_groups_th : post.distance_groups_en;
 
-  //   const acf = post.acf as Record<
-  //     string,
-  //     string | DistanceGroup[] | undefined
-  //   >;
-
-  //   return {
-  //     mapImage: (acf.map_image as string) || fallback.mapImage,
-  //     googleMapsUrl:
-  //       (acf.google_maps_embed as string) || fallback.googleMapsUrl,
-  //     description:
-  //       (acf[`description_${lang}`] as string) ??
-  //       (acf.description as string) ??
-  //       fallback.description,
-  //     distanceGroups: (() => {
-  //       const langGroups = acf[`distance_groups_${lang}`] as
-  //         | DistanceGroup[]
-  //         | undefined;
-  //       const baseGroups = acf.distance_groups as DistanceGroup[] | undefined;
-  //       return (
-  //         langGroups ??
-  //         (baseGroups?.length ? baseGroups : fallback.distanceGroups)
-  //       );
-  //     })(),
-  //   };
-  // } catch {
-  //   return fallback;
-  // }
+    return {
+      mapImage: post.map_image ?? fallback.mapImage,
+      googleMapsUrl: post.google_maps_url ?? fallback.googleMapsUrl,
+      description: description ?? fallback.description,
+      address: addressRaw
+        ? addressRaw.split(/\r?\n/).filter(Boolean)
+        : fallback.address,
+      distanceGroups: distanceGroups?.length
+        ? distanceGroups
+        : fallback.distanceGroups,
+    };
+  } catch {
+    return fallback;
+  }
 }

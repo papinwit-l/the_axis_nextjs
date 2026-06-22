@@ -12,51 +12,22 @@ export type GalleryData = {
 
 const FALLBACK: GalleryData = {
   exterior: [
-    {
-      src: "/images/gallery/gallery-exterior-01.png",
-      alt: "exterior-01",
-    },
-    {
-      src: "/images/gallery/gallery-exterior-02.png",
-      alt: "exterior-02",
-    },
-    {
-      src: "/images/gallery/gallery-exterior-03.png",
-      alt: "exterior-03",
-    },
-    {
-      src: "/images/gallery/gallery-exterior-04.png",
-      alt: "exterior-04",
-    },
-    {
-      src: "/images/gallery/gallery-exterior-05.png",
-      alt: "exterior-05",
-    },
-    {
-      src: "/images/gallery/gallery-exterior-06.png",
-      alt: "exterior-06",
-    },
+    { src: "/images/gallery/gallery-exterior-01.png", alt: "exterior-01" },
+    { src: "/images/gallery/gallery-exterior-02.png", alt: "exterior-02" },
+    { src: "/images/gallery/gallery-exterior-03.png", alt: "exterior-03" },
+    { src: "/images/gallery/gallery-exterior-04.png", alt: "exterior-04" },
+    { src: "/images/gallery/gallery-exterior-05.png", alt: "exterior-05" },
+    { src: "/images/gallery/gallery-exterior-06.png", alt: "exterior-06" },
   ],
   interior: [
-    {
-      src: "/images/gallery/gallery-interior-01.png",
-      alt: "interior-01",
-    },
-    {
-      src: "/images/gallery/gallery-interior-02.png",
-      alt: "interior-02",
-    },
-    {
-      src: "/images/gallery/gallery-interior-03.png",
-      alt: "interior-03",
-    },
+    { src: "/images/gallery/gallery-interior-01.png", alt: "interior-01" },
+    { src: "/images/gallery/gallery-interior-02.png", alt: "interior-02" },
+    { src: "/images/gallery/gallery-interior-03.png", alt: "interior-03" },
   ],
 };
 
 export async function getGallery(): Promise<GalleryData> {
   try {
-    return FALLBACK;
-
     const posts = await getPosts("gallery", {
       orderby: "menu_order",
       order: "asc",
@@ -68,7 +39,6 @@ export async function getGallery(): Promise<GalleryData> {
       const media = getFeaturedMedia(post);
       const src = getImageUrl(media, "large");
 
-      // Skip posts without a featured image
       if (!src) continue;
 
       const image: GalleryImage = {
@@ -76,8 +46,8 @@ export async function getGallery(): Promise<GalleryData> {
         alt: getAltText(media, post.title.rendered),
       };
 
-      const category = (post.acf as { gallery_category?: string })
-        ?.gallery_category;
+      const category = (post as unknown as { gallery_category: string })
+        .gallery_category;
 
       if (category === "interior") {
         gallery.interior.push(image);
