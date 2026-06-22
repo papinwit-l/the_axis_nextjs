@@ -49,7 +49,10 @@ export default function GallerySection({
     <section id="gallery" className="bg-accent-light py-14 lg:py-28">
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Heading */}
-        <div ref={headingRef} className="text-center mb-8 lg:mb-14">
+        <div
+          ref={headingRef}
+          className={`text-center mb-8 lg:mb-14 reveal reveal-delay-1 ${hv}`}
+        >
           {/* <Logo className={`mx-auto mb-2 h-3 text-accent reveal ${hv}`} /> */}
           {t.subHeading && <p>{t.subHeading}</p>}
           <h2

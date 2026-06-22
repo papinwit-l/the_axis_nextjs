@@ -40,7 +40,10 @@ export default function UnitSection({
     >
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
         {/* Section heading */}
-        <div ref={headingRef} className="text-center mb-10">
+        <div
+          ref={headingRef}
+          className={`text-center mb-10 reveal reveal-delay-1 ${hv}`}
+        >
           {t.unit.subHeading && <p>{t.unit.subHeading}</p>}
           <h2
             className={`${lang == "th" ? "font-body" : "font-display tracking-[0.15em]"} text-3xl lg:text-4xl text-accent uppercase reveal reveal-delay-1 ${hv}`}
