@@ -42,6 +42,7 @@ export default function FormSection({ lang }: { lang: string }) {
       lineId: form.get("lineId"),
       hearAbout: form.get("hearAbout"),
       website: form.get("website"), // honeypot
+      lang,
     };
 
     try {

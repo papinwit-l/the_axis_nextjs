@@ -34,7 +34,7 @@ async function getSheets() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { fullName, mobile, email, lineId, hearAbout, website } = body;
+    const { fullName, mobile, email, lineId, hearAbout, website, lang } = body;
 
     // Honeypot check — "website" field should be empty
     if (website) {
@@ -56,16 +56,30 @@ export async function POST(req: NextRequest) {
     }
 
     const sheets = await getSheets();
-    const timestamp = new Date().toLocaleString("th-TH", {
+    const now = new Date();
+    const date = now.toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" });
+    const time = now.toLocaleTimeString("th-TH", {
       timeZone: "Asia/Bangkok",
+      hour12: false,
     });
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-      range: "Sheet1!A:F",
+      range: "Leads!A:F",
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[timestamp, fullName, mobile, email, lineId, hearAbout]],
+        values: [
+          [
+            date,
+            time,
+            fullName,
+            mobile,
+            email,
+            lineId,
+            hearAbout,
+            lang?.toUpperCase() || "",
+          ],
+        ],
       },
     });
 
