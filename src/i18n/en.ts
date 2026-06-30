@@ -26,6 +26,9 @@ export default {
       "Other",
     ],
     register: "Register",
+    loading: "Registering...",
+    success: "Thank you for registering. We will contact you shortly.",
+    error: "Something went wrong. Please try again.",
     privacy: "Accept I have read and accept the",
     privacyLink: "Privacy Policy",
     privacySuffix:

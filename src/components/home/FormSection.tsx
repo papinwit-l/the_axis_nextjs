@@ -19,13 +19,48 @@ const HEAR_ABOUT_OPTIONS = [
 export default function FormSection({ lang }: { lang: string }) {
   const [accepted, setAccepted] = useState(false);
   const { ref, isVisible } = useScrollReveal();
+
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
   const t = getDictionary(lang).form;
 
   const v = isVisible ? "reveal--visible" : "";
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle form submission
+    if (!accepted) return;
+
+    setStatus("loading");
+
+    const form = new FormData(e.currentTarget);
+    const data = {
+      fullName: form.get("fullName"),
+      mobile: form.get("mobile"),
+      email: form.get("email"),
+      lineId: form.get("lineId"),
+      hearAbout: form.get("hearAbout"),
+      website: form.get("website"), // honeypot
+    };
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+        setAccepted(false);
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -136,11 +171,23 @@ export default function FormSection({ lang }: { lang: string }) {
           >
             <button
               type="submit"
-              className={`${lang == "th" ? `font-body` : `font-display`} text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer`}
+              disabled={!accepted || status === "loading"}
+              className={`${lang == "th" ? `font-body` : `font-display`} text-lg lg:text-xl tracking-[0.15em] text-accent border border-accent rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-accent hover:text-secondary transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-accent`}
             >
-              {t.register}
+              {status === "loading" ? t.loading : t.register}
             </button>
           </div>
+
+          {status === "success" && (
+            <p className="text-center font-body text-sm text-brown-700">
+              {t.success}
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-center font-body text-sm text-[#8b3a3a]">
+              {t.error}
+            </p>
+          )}
 
           <div
             className={`flex items-start justify-center gap-3 pt-2 reveal reveal-delay-5 ${v}`}
@@ -166,6 +213,15 @@ export default function FormSection({ lang }: { lang: string }) {
               {t.privacySuffix}
             </label>
           </div>
+
+          {/* Honeypot — hidden from users, bots will fill it */}
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            className="fixed -top-[9999px] -left-[9999px] opacity-0 pointer-events-none h-0 w-0"
+          />
         </form>
       </div>
     </section>
