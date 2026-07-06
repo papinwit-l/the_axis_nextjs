@@ -5,6 +5,7 @@ import { google } from "googleapis";
 const rateLimit = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const RATE_LIMIT_MAX = 3; // max 3 submissions per minute per IP
+const SheetName = "Website Leads";
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEETS_SPREADSHEET_ID,
-      range: "Leads!A:F",
+      range: `${SheetName}!A:H`,
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
