@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getContact } from "@/lib/wordpress";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 // const acciaPiano = localFont({
 //   src: [
@@ -57,6 +58,9 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <GoogleTagManager
+        gtmId={process.env.NEXT_PUBLIC_GTM_ID || "GTM-NLGLMN32"}
+      />
       <body className="min-h-screen flex flex-col antialiased">{children}</body>
     </html>
   );
