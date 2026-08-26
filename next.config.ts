@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
         hostname: "203.170.129.6",
       },
     ],
+    unoptimized: true,
   },
 };
 
